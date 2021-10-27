@@ -28,7 +28,7 @@ set scrolloff=8
 set signcolumn=yes
 set termguicolors
 
-colorscheme xcodewwdc
+colorscheme rose-pine
 set background=dark
 
 nnoremap <leader>sv :source $MYVIMRC<CR>
