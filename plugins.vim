@@ -34,5 +34,7 @@ return require('packer').startup(function()
             vim.cmd('colorscheme rose-pine')
         end
     })
+
+    use("terrortylor/nvim-comment")
 end)
 EOF

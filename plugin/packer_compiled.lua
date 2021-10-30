@@ -69,6 +69,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["nvim-comment"] = {
+    loaded = true,
+    path = "C:\\Users\\marce\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-comment"
+  },
   ["rose-pine"] = {
     config = { "\27LJ\2\nå\1\0\0\3\0\a\0\r6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0+\1\2\0=\1\4\0006\0\0\0009\0\5\0'\2\6\0B\0\2\1K\0\1\0\26colorscheme rose-pine\bcmd\30rose_pine_disable_italics\tmoon\22rose_pine_variant\6g\bvim\0" },
     loaded = true,

@@ -13,6 +13,9 @@ nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
 
+nnoremap <silent> <M-/> :CommentToggle<CR>
+vnoremap <silent> <M-/> :CommentToggle<CR>
+
 augroup AUTOCMD_GROUP
     autocmd!
     autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync(nil, 100)
@@ -22,6 +25,8 @@ augroup AUTOCMD_GROUP
     autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
     autocmd BufWritePre *.java lua vim.lsp.buf.formatting_sync(nil, 100)
     autocmd BufWritePre *.fs lua vim.lsp.buf.formatting_sync(nil, 100)
+    autocmd BufEnter *.c,*.cpp,*.h,*.hpp :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+    autocmd BufFilePost *.c,*.cpp,*.h,*.hpp :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
 augroup END
 
 lua require'lspconfig'.clangd.setup{}
