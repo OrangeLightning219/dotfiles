@@ -16,6 +16,9 @@ vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_a
 nnoremap <silent> <M-/> :CommentToggle<CR>
 vnoremap <silent> <M-/> :CommentToggle<CR>
 
+nnoremap <silent> <C-s> :w<CR>
+inoremap <silent> <C-s> <Cmd>:w<CR>
+
 augroup AUTOCMD_GROUP
     autocmd!
     autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync(nil, 100)

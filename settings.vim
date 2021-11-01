@@ -2,7 +2,7 @@ syntax on
 
 let mapleader = " "
 
-set wrap linebreak nolist
+set nowrap linebreak nolist
 set splitbelow splitright
 set tabstop=4
 set softtabstop=4
