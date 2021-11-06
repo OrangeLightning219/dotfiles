@@ -27,7 +27,7 @@ set incsearch
 set scrolloff=8
 set signcolumn=yes
 set termguicolors
-
+set completeopt=menu,menuone,noselect
 colorscheme rose-pine
 set background=dark
 

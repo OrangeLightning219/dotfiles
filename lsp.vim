@@ -31,5 +31,3 @@ augroup AUTOCMD_GROUP
     autocmd BufEnter *.c,*.cpp,*.h,*.hpp :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
     autocmd BufFilePost *.c,*.cpp,*.h,*.hpp :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
 augroup END
-
-lua require'lspconfig'.clangd.setup{}
