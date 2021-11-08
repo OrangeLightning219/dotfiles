@@ -8,6 +8,7 @@ luafile E:/Tools/neovim-config/nvim/plugin-configs/lualine.lua
 luafile E:/Tools/neovim-config/nvim/plugin-configs/tree-sitter.lua
 luafile E:/Tools/neovim-config/nvim/plugin-configs/neogit.lua
 luafile E:/Tools/neovim-config/nvim/plugin-configs/nvim-comment.lua
+luafile E:/Tools/neovim-config/nvim/plugin-configs/trouble.lua
 
 source E:/Tools/neovim-config/nvim/settings.vim
 source E:/Tools/neovim-config/nvim/neovide.vim

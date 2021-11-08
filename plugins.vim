@@ -24,6 +24,8 @@ Plug 'TimUntersberger/neogit'
 
 Plug 'mhinz/vim-startify'
 
+Plug 'folke/trouble.nvim'
+
 call plug#end()
 
 lua << EOF
