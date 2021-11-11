@@ -26,6 +26,8 @@ Plug 'mhinz/vim-startify'
 
 Plug 'folke/trouble.nvim'
 
+Plug 'tibabit/vim-templates'
+
 call plug#end()
 
 lua << EOF
