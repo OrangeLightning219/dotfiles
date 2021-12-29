@@ -31,7 +31,11 @@ set completeopt=menu,menuone,noselect
 colorscheme rose-pine
 set background=dark
 
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+
 nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>r @:
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 nnoremap <C-h> <C-w>h
