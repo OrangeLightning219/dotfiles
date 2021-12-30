@@ -1,5 +1,6 @@
 -- following options are the default
 require'nvim-tree'.setup {
+  filters = {custom = { '.git', 'node_modules', '.cache' }},
   -- disables netrw completely
   disable_netrw       = true,
   -- hijack netrw window on startup

@@ -1,16 +1,44 @@
-source E:/Tools/neovim-config/nvim/plugins.vim
+function! GetOS() abort
+    if has('win64') || has('win32') || has('win16')
+        return 'WINDOWS'
+    else
+       return toupper(substitute(system('uname'), '\n', '', ''))
+    endif
+endfunction
 
-luafile E:/Tools/neovim-config/nvim/plugin-configs/autocomplete.lua
-luafile E:/Tools/neovim-config/nvim/plugin-configs/lspsaga.lua
-luafile E:/Tools/neovim-config/nvim/plugin-configs/nvim-tree.lua
-source E:/Tools/neovim-config/nvim/plugin-configs/nvim-tree.vim
-luafile E:/Tools/neovim-config/nvim/plugin-configs/lualine.lua
-luafile E:/Tools/neovim-config/nvim/plugin-configs/tree-sitter.lua
-luafile E:/Tools/neovim-config/nvim/plugin-configs/neogit.lua
-luafile E:/Tools/neovim-config/nvim/plugin-configs/nvim-comment.lua
-luafile E:/Tools/neovim-config/nvim/plugin-configs/trouble.lua
-source E:/Tools/neovim-config/nvim/plugin-configs/templates.vim
+if (GetOS() =~# 'WINDOWS')
+    source  %XDG_CONFIG_HOME%/nvim/plugins.vim
 
-source E:/Tools/neovim-config/nvim/settings.vim
-source E:/Tools/neovim-config/nvim/neovide.vim
-source E:/Tools/neovim-config/nvim/lsp.vim
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/autocomplete.lua
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/lspsaga.lua
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/nvim-tree.lua
+    source  %XDG_CONFIG_HOME%/nvim/plugin-configs/nvim-tree.vim
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/lualine.lua
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/tree-sitter.lua
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/neogit.lua
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/nvim-comment.lua
+    luafile %XDG_CONFIG_HOME%/nvim/plugin-configs/trouble.lua
+    source  %XDG_CONFIG_HOME%/nvim/plugin-configs/templates.vim
+
+    source %XDG_CONFIG_HOME%/nvim/settings.vim
+    source %XDG_CONFIG_HOME%/nvim/neovide.vim
+    source %XDG_CONFIG_HOME%/nvim/lsp.vim
+else
+    source  $XDG_CONFIG_HOME/nvim/plugins.vim
+
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/autocomplete.lua
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/lspsaga.lua
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/nvim-tree.lua
+    source  $XDG_CONFIG_HOME/nvim/plugin-configs/nvim-tree.vim
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/lualine.lua
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/tree-sitter.lua
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/neogit.lua
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/nvim-comment.lua
+    luafile $XDG_CONFIG_HOME/nvim/plugin-configs/trouble.lua
+    source  $XDG_CONFIG_HOME/nvim/plugin-configs/templates.vim
+
+    source $XDG_CONFIG_HOME/nvim/settings.vim
+    source $XDG_CONFIG_HOME/nvim/neovide.vim
+    source $XDG_CONFIG_HOME/nvim/lsp.vim
+
+endif

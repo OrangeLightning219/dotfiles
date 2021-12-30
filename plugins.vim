@@ -1,4 +1,8 @@
-call plug#begin('E:/Tools/neovim-config/nvim/autoload')
+if (GetOS() =~# 'WINDOWS')
+    call plug#begin('%XDG_CONFIG_HOME%/nvim/autoload')
+else
+    call plug#begin('$XDG_CONFIG_HOME/nvim/autoload')
+endif
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
