@@ -10,6 +10,7 @@ luafile $XDG_CONFIG_HOME/nvim/plugin-configs/neogit.lua
 luafile $XDG_CONFIG_HOME/nvim/plugin-configs/nvim-comment.lua
 luafile $XDG_CONFIG_HOME/nvim/plugin-configs/trouble.lua
 source  $XDG_CONFIG_HOME/nvim/plugin-configs/templates.vim
+luafile  $XDG_CONFIG_HOME/nvim/plugin-configs/symbols-outline.lua
 
 source $XDG_CONFIG_HOME/nvim/settings.vim
 source $XDG_CONFIG_HOME/nvim/neovide.vim

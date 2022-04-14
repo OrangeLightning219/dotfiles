@@ -22,7 +22,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'TimUntersberger/neogit'
 
-" Plug 'mhinz/vim-startify'
+Plug 'simrat39/symbols-outline.nvim'
 
 Plug 'folke/trouble.nvim'
 
