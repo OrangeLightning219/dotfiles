@@ -28,6 +28,8 @@ Plug 'folke/trouble.nvim'
 
 Plug 'tibabit/vim-templates'
 
+Plug 'kalvinpearce/ShaderHighlight'
+
 call plug#end()
 
 lua << EOF
