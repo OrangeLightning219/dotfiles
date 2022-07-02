@@ -45,3 +45,7 @@ nnoremap <C-k> <C-w>k
 
 nnoremap <F8> :SymbolsOutline<CR>
 inoremap <F8> :SymbolsOutline<CR>
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
