@@ -166,7 +166,7 @@ require("nvim-tree").setup {
       },
     }
 
-vim.api.nvim_command[[
+vim.api.nvim_command([[
   autocmd ColorScheme * highlight! link NvimTreeGitNew TSString
   autocmd ColorScheme * highlight! link NvimTreeFileNew TSVariable
 
@@ -184,4 +184,4 @@ vim.api.nvim_command[[
   
   autocmd ColorScheme * highlight! link NvimTreeFileIgnored TSVariable
   autocmd ColorScheme * highlight! link NvimTreeGitIgnored TSComment
-]]
+]])
