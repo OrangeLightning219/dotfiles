@@ -7,7 +7,7 @@ vim.g.mapleader = " "
 
 vim.g.nobackup = true
 vim.g.noswapfile = true
-vim.g.neovide_remember_window_size = 'v:true'
+vim.g.neovide_remember_window_size = true
 vim.g.tabstob = 4
 vim.g.nowrap = true
 vim.g.nolist = true
