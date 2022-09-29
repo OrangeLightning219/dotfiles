@@ -8,6 +8,5 @@ require("nvim-tree_config")
 require("neogit_config")
 require("nvim-comment_config")
 require("trouble_config")
-require("symbols-outline_config")
 
 require("settings")

@@ -24,13 +24,13 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'TimUntersberger/neogit'
 
-Plug 'simrat39/symbols-outline.nvim'
-
 Plug 'folke/trouble.nvim'
 
 Plug 'tibabit/vim-templates'
 
 Plug 'kalvinpearce/ShaderHighlight'
+
+Plug 'Raimondi/delimitMate'
 
 vim.call('plug#end')
 
