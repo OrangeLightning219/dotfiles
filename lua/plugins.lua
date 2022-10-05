@@ -15,18 +15,15 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
--- Plug 'nvim-telescope/telescope.nvim'
-
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
+Plug ('nvim-telescope/telescope.nvim', { tag = '0.1.0' })
+Plug ('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+
 Plug 'TimUntersberger/neogit'
-
-Plug 'folke/trouble.nvim'
-
-Plug 'tibabit/vim-templates'
 
 Plug 'kalvinpearce/ShaderHighlight'
 

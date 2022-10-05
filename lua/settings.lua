@@ -11,6 +11,7 @@ vim.g.neovide_remember_window_size = true
 vim.g.tabstob = 4
 vim.g.nowrap = true
 vim.g.nolist = true
+vim.g.delimitMate_expand_cr = 1
 
 vim.opt.laststatus = 2
 vim.opt.autoread = true
@@ -40,7 +41,7 @@ vim.opt.linebreak = true
 vim.opt.number = true
 vim.opt.signcolumn = 'yes'
 
-vim.opt.guifont = { 'CaskaydiaCove NF', ':h13' }
+vim.opt.guifont = { 'CaskaydiaCove NF', ':h11' }
 
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }
@@ -61,10 +62,17 @@ keymap( 'i', '<F8>', ':SymbolsOutline<CR>', options)
 
 keymap( 'n', '<C-n>', ':NvimTreeToggle<CR>', options)
 
-keymap( 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', options)
 keymap( 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', options)
-keymap( 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', options)
 keymap( 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', options)
+keymap( 'n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>', options)
+
+keymap( 'n', '<leader>gr', ':Telescope lsp_references<CR>', options)
+keymap( 'n', '<leader>gd', ':Telescope lsp_definitions<CR>', options)
+
+keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
+keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
+keymap('n', '<leader>d', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
+keymap('n', '<leader>e', ':Telescope diagnostics<CR>', options)
 
 keymap( 'n', 'K',          ':Lspsaga hover_doc<CR>', options)
 keymap( 'i', '<C-k>',      '<Cmd>Lspsaga signature_help<CR>', options)
