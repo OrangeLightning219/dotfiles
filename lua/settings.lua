@@ -57,9 +57,6 @@ keymap( 'n', '<C-k>',      '<C-w>k', options)
 
 options.silent = true
 
-keymap( 'n', '<F8>', ':SymbolsOutline<CR>', options)
-keymap( 'i', '<F8>', ':SymbolsOutline<CR>', options)
-
 keymap( 'n', '<C-n>', ':NvimTreeToggle<CR>', options)
 
 keymap( 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', options)
@@ -84,8 +81,18 @@ keymap( 'n', '<M-/>', ':CommentToggle<CR>', options)
 keymap( 'i', '<M-/>', '<Cmd>:CommentToggle<CR>', options)
 keymap( 'v', '<M-/>', ':CommentToggle<CR>', options)
 
-keymap( 'n', '<C-s>', ':w<CR>', options)
-keymap( 'i', '<C-s>', '<Cmd>:w<CR>', options)
+keymap( 'n', '<C-s>', ':wa<CR>', options)
+keymap( 'i', '<C-s>', '<Cmd>:wa<CR>', options)
+
+
+keymap( 'n', '<F5>', '<cmd>:wa <bar> lua require("yabs"):run_task("build")<CR>', options)
+keymap( 'i', '<F5>', '<cmd>:wa <bar> lua require("yabs"):run_task("build")<CR>', options)
+keymap('n', '<M-.>', ':cn<CR>', options)
+keymap('i', '<M-.>', '<Cmd>:cn<CR>', options)
+keymap('n', '<M-,>', ':cp<CR>', options)
+keymap('i', '<M-,>', '<Cmd>:cp<CR>', options)
+keymap( 'n', '<leader>q', ':cclose<CR>', options)
+
 
 vim.cmd([[
     augroup AUTOCMD_GROUP
@@ -97,6 +104,7 @@ vim.cmd([[
         autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
         autocmd BufWritePre *.java lua vim.lsp.buf.formatting_sync(nil, 100)
         autocmd BufEnter *.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+        autocmd BufEnter *.c,*.cpp,*.h,*.hpp set errorformat=\ %#%f(%l\\\,%c):\ error\ C%n:\ %m 
         autocmd BufFilePost *.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
     augroup END
 ]])
