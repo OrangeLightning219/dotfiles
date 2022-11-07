@@ -20,6 +20,19 @@ require('yabs'):setup({
     },
   },
   tasks = { -- Same values as `language.tasks`, but global
+    build = {
+      command = 'build.bat',
+      output = 'quickfix', -- Where to show output of the
+      -- command. Can be `buffer`,
+      -- `consolation`, `echo`,
+      -- `quickfix`, `terminal`, or `none`
+      opts = { -- Options for output (currently, there's only
+        -- `open_on_run`, which defines the behavior
+        -- for the quickfix list opening) (can be
+        -- `never`, `always`, or `auto`, the default)
+        open_on_run = 'auto',
+      },
+    }
   },
   opts = { -- Same values as `language.opts`
     output_types = {
