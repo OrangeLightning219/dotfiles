@@ -6,6 +6,8 @@ local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
 local putils = require("telescope.previewers.utils")
+local themes = require('telescope.themes')
+local notify = require('notify')
 
 local nvim_cpp = {}
 
@@ -24,23 +26,24 @@ function nvim_cpp.setup(opts)
         nvim_cpp.previewer = conf.qflist_previewer(opts)
     end    
 
-    vim.api.nvim_create_user_command('FindDeclaration', nvim_cpp.show_picker, {nargs = 0, desc = ''}) 
+    vim.api.nvim_create_user_command('FindDeclaration', nvim_cpp.show_declarations_picker, {nargs = 0, desc = ''}) 
+    vim.api.nvim_create_user_command('CompileCpp', nvim_cpp.compile, {nargs = 0, desc = ''}) 
     vim.api.nvim_create_user_command('ExitCpp', nvim_cpp.exit, {nargs = 0, desc = ''}) 
     vim.api.nvim_create_user_command('SignatureHelp', nvim_cpp.signature_help, {nargs = 0, desc = ''}) 
 
-    local job = require('plenary.job')
-    job:new({
-        command = "nvim-cpp",
-        cwd = vim.fn.getcwd(),
-    }):start()
-    vim.loop.sleep(100)
     if nvim_cpp.channel_id == nil then
+        local job = require('plenary.job')
+        job:new({
+            command = "nvim-cpp",
+            cwd = vim.fn.getcwd(),
+        }):start()
+        vim.loop.sleep(100)
         nvim_cpp.channel_id = vim.fn.sockconnect("tcp", "localhost:12345", {rpc = true})
-        nvim_cpp.get_results()
+        nvim_cpp.get_declarations()
     end
 end
 
-function nvim_cpp.get_results()
+function nvim_cpp.get_declarations()
     if nvim_cpp.channel_id == nil then
         return {}
     end
@@ -117,14 +120,14 @@ function nvim_cpp.get_results()
             end
         end
         nvim_cpp.functions_cache = functions_cache
-        nvim_cpp.entry_cache = entries
+        nvim_cpp.declaration_entry_cache = entries
         return entries
     else
-        return nvim_cpp.entry_cache or {}
+        return nvim_cpp.declaration_entry_cache or {}
     end
 end
 
-function nvim_cpp.create_entry(entry)
+function nvim_cpp.create_declaration_entry(entry)
     entry["col"] = 0
     entry["start"] = 0
     entry["finish"] = 0
@@ -156,10 +159,9 @@ function nvim_cpp.create_entry(entry)
     return entry
 end
 
-function nvim_cpp.default_action(prompt_bufnr, map)
+function nvim_cpp.default_declaration_action(prompt_bufnr, map)
     actions.close(prompt_bufnr)
     local selection = action_state.get_selected_entry()
-    local buffer = selection.bufnr
     local location = 
     {
         uri = selection.path,
@@ -172,9 +174,9 @@ function nvim_cpp.default_action(prompt_bufnr, map)
     local jump_successful = vim.lsp.util.jump_to_location(location, "utf-8", true)
 end
 
-function nvim_cpp.show_picker(opts)
+function nvim_cpp.show_declarations_picker(opts)
     opts = opts or {}
-    vim.api.nvim_set_hl(0, "TelescopeMatching", {link = "String"})
+    -- vim.api.nvim_set_hl(0, "TelescopeMatching", {link = "String"})
 
     -- if nvim_cpp.channel_id == nil then
     --     nvim_cpp.channel_id = vim.fn.sockconnect("tcp", "localhost:12345", {rpc = true})
@@ -186,18 +188,56 @@ function nvim_cpp.show_picker(opts)
         previewer = nvim_cpp.previewer,
         finder = finders.new_table(
         {
-            results = nvim_cpp.get_results(),
-            entry_maker = nvim_cpp.create_entry
+            results = nvim_cpp.get_declarations(),
+            entry_maker = nvim_cpp.create_declaration_entry
         }),
         sorter = conf.generic_sorter(opts),
         attach_mappings = function(prompt_bufnr, map)
             actions.select_default:replace(function()
-                nvim_cpp.default_action(prompt_bufnr, map)
+                nvim_cpp.default_declaration_action(prompt_bufnr, map)
             end)
             return true
         end,
     })
     picker:find()
+end
+
+function nvim_cpp.compile()
+    if nvim_cpp.channel_id == nil then
+        return {}
+    end
+    local notify_config = {render = "minimal", stages = "fade", fps = 60 }
+    local result = vim.fn.rpcrequest(nvim_cpp.channel_id, "Compile")
+
+    local started = result["started"]
+    local messages = result["messages"] or {}
+    
+    if started and #messages > 0 then
+        local entries = {}
+        for index, message in ipairs(messages) do
+            local entry = {}
+            -- entry["bufnr"] = vim.uri_to_bufnr("E:\\Projects\\nvim-cpp\\main.cpp")
+            entry["filename"] = message["filename"] or ""
+            entry["lnum"] = message["lnum"] or 1
+            entry["col"] = message["col"] or 1
+            entry["nr"] = message["nr"] or ""
+            entry["text"] = message["text"]
+            entry["type"] = message["type"]
+            table.insert(entries, entry)
+        end
+        print(vim.inspect(entries))
+
+        notify("Compilation failed", "error", notify_config)
+        vim.fn.setqflist(entries, "r")
+        vim.api.nvim_command("bot copen")
+        -- vim.api.nvim_command("wincmd p")
+    elseif started and #messages == 0 then
+        notify("Compilation successful", "info", notify_config)
+        vim.api.nvim_command("cclose")
+    else
+        notify("Compilation failed", "error", notify_config)
+        vim.api.nvim_command("cclose")
+    end
 end
 
 function nvim_cpp.signature_help()

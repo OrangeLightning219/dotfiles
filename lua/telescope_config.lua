@@ -1,4 +1,4 @@
--- require('telescope').setup()
+require('telescope').setup()
 
 -- local actions = require("telescope.actions")
 -- local action_state = require("telescope.actions.state")

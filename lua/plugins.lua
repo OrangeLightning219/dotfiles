@@ -24,8 +24,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug ('nvim-telescope/telescope.nvim', { tag = '0.1.0' })
 Plug ('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
 
-Plug 'pianocomposer321/yabs.nvim'
-
 Plug 'TimUntersberger/neogit'
 
 Plug 'kalvinpearce/ShaderHighlight'
@@ -34,23 +32,14 @@ Plug 'Raimondi/delimitMate'
 
 Plug 'rhysd/vim-clang-format'
 
+Plug 'rcarriga/nvim-notify'
+
+Plug ('rose-pine/neovim', { as = 'rose-pine' })
+
 vim.call('plug#end')
 
 local function packer_plugins()
     use('wbthomason/packer.nvim')
-
-    use({ 'Deathbat2190/neovim-rose-pine-theme',
-          as = 'rose-pine',
-          config = function()
-            -- Options (see available options below)
-            vim.g.rose_pine_variant = 'moon'
-            vim.g.rose_pine_disable_italics = true
-
-            -- Load colorscheme after options
-            vim.cmd('colorscheme rose-pine')
-          end
-        })
-
     use("terrortylor/nvim-comment")
 end
 

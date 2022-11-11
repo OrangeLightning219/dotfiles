@@ -75,9 +75,11 @@ keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
 
 -- nvim-cpp bindings
 keymap('n', '<leader>d', ':FindDeclaration<CR>', options)
-keymap('n', '<leader>e', ':ExitCpp<CR>', options)
+-- keymap('n', '<leader>e', ':ExitCpp<CR>', options)
 keymap('n', '<C-K>', ':SignatureHelp<CR>', options)
 keymap('i', '<C-K>', '<Cmd>SignatureHelp<CR>', options)
+keymap('n', '<F5>', ':CompileCpp<CR>', options)
+keymap('i', '<F5>', '<cmd>:CompileCpp<CR>', options)
 
 keymap('n', '<M-/>', ':CommentToggle<CR>', options)
 keymap('i', '<M-/>', '<Cmd>:CommentToggle<CR>', options)
@@ -86,10 +88,9 @@ keymap('v', '<M-/>', ':CommentToggle<CR>', options)
 keymap('n', '<C-s>', ':wa<CR>', options)
 keymap('i', '<C-s>', '<Cmd>:wa<CR>', options)
 
-keymap('n', '<leader>s', ':ClangdSwitchSourceHeader<CR>', options)
+-- keymap('n', '<leader>s', ':ClangdSwitchSourceHeader<CR>', options)
 
-keymap('n', '<F5>', '<cmd>:wa <bar> lua require("yabs"):run_task("build")<CR>', options)
-keymap('i', '<F5>', '<cmd>:wa <bar> lua require("yabs"):run_task("build")<CR>', options)
+
 keymap('n', '<M-.>', ':try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>', options)
 keymap('i', '<M-.>', '<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>', options)
 keymap('n', '<M-,>', ':try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>', options)
@@ -104,7 +105,7 @@ vim.cmd([[
         autocmd BufWritePre *.cpp ClangFormat
         autocmd BufWritePre *.hpp ClangFormat
         autocmd BufEnter *.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
-        autocmd BufEnter *.c,*.cpp,*.h,*.hpp set errorformat=\ %#%f(%l\\\,%c):\ error\ C%n:\ %m 
+        autocmd BufEnter *.* NvimTreeClose
         autocmd BufFilePost *.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
     augroup END
 ]])

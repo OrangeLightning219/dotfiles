@@ -17,9 +17,9 @@ local function close_completion_window(moveUp)
 end
 
 cmp.setup({
-  -- view = {                                                
-  --   entries = {name = 'wildmenu', separator = '|' }       
-  -- },
+  view = {                                                
+    entries = {name = 'wildmenu', separator = '|' }       
+  },
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
