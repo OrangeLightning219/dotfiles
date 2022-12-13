@@ -225,7 +225,7 @@ function nvim_cpp.compile()
             entry["type"] = message["type"]
             table.insert(entries, entry)
         end
-        print(vim.inspect(entries))
+        -- print(vim.inspect(entries))
 
         notify("Compilation failed", "error", notify_config)
         vim.fn.setqflist(entries, "r")

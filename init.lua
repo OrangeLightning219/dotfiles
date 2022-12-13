@@ -9,6 +9,6 @@ require("nvim-comment_config")
 require("telescope_config")
 require("rose-pine_config")
 
-require("nvim-cpp").setup()
+-- require("nvim-cpp").setup()
 
 require("settings")

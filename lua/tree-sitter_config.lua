@@ -1,6 +1,19 @@
 require 'nvim-treesitter.install'.compilers = { "cl", "clang", "gcc" }
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.jai = {
+  install_info = {
+    url = "E:/Tools/tree-sitter-jai", 
+    files = {"src/parser.c", "src/scanner.cc"},
+  },
+  filetype = "jai", 
+}
+
+local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+ft_to_parser.jai = "jai"
+
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "html",
+  ensure_installed = {"c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "html", "jai",
                       "java", "javascript", "json", "lua", "make", "markdown", "python", "vim", "yaml"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {}, -- List of parsers to ignore installing
   highlight = {
