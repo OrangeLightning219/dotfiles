@@ -36,11 +36,11 @@ Plug 'rcarriga/nvim-notify'
 
 Plug ('rose-pine/neovim', { as = 'rose-pine' })
 
+Plug "terrortylor/nvim-comment"
+
+Plug "pianocomposer321/yabs.nvim"
+
+-- Plug 'rluba/jai.vim'
+Plug 'OrangeLightning219/nvim-jai'
+
 vim.call('plug#end')
-
-local function packer_plugins()
-    use('wbthomason/packer.nvim')
-    use("terrortylor/nvim-comment")
-end
-
-require('packer').startup(packer_plugins)

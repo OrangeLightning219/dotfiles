@@ -18,6 +18,18 @@ require('yabs'):setup({
         },
       },
     },
+    jai = {
+      default_task = 'build',
+      tasks = {
+        build = {
+          command = 'jai ./first.jai',
+          output = 'quickfix', 
+          opts = {
+            open_on_run = 'auto',
+          },
+        },
+      }
+    }
   },
   tasks = { -- Same values as `language.tasks`, but global
     build = {

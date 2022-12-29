@@ -1,0 +1,5 @@
+return {
+  extension = {
+    ['jai'] = 'jai',
+  }
+}

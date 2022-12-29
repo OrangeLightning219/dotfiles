@@ -58,28 +58,14 @@ options.silent = true
 
 keymap( 'n', '<C-n>', ':NvimTreeToggle<CR>', options)
 
--- keymap( 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', options)
--- keymap( 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', options)
--- keymap( 'n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>', options)
-
--- keymap( 'n', '<leader>gr', ':Telescope lsp_references<CR>', options)
--- keymap( 'n', '<leader>gd', ':Telescope lsp_definitions<CR>', options)
-
-
--- keymap('n', '<leader>f', ":FindFilesCustom<CR>", options)
 keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
 keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
--- keymap('n', '<leader>d', ':Telescope treesitter<CR>', options)
--- keymap('n', '<leader>d', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
--- keymap('n', '<leader>e', ':Telescope diagnostics<CR>', options)
 
--- nvim-cpp bindings
-keymap('n', '<leader>d', ':FindDeclaration<CR>', options)
--- keymap('n', '<leader>e', ':ExitCpp<CR>', options)
-keymap('n', '<C-K>', ':SignatureHelp<CR>', options)
-keymap('i', '<C-K>', '<Cmd>SignatureHelp<CR>', options)
-keymap('n', '<F5>', ':CompileCpp<CR>', options)
-keymap('i', '<F5>', '<cmd>:CompileCpp<CR>', options)
+-- nvim-jai bindings
+keymap('n', '<leader>d', ':JaiFindDeclaration<CR>', options)
+
+keymap('n', '<F5>', ':CompileJai<CR>', options)
+keymap('i', '<F5>', '<cmd>:CompileJai<CR>', options)
 
 keymap('n', '<M-/>', ':CommentToggle<CR>', options)
 keymap('i', '<M-/>', '<Cmd>:CommentToggle<CR>', options)
@@ -88,24 +74,39 @@ keymap('v', '<M-/>', ':CommentToggle<CR>', options)
 keymap('n', '<C-s>', ':wa<CR>', options)
 keymap('i', '<C-s>', '<Cmd>:wa<CR>', options)
 
--- keymap('n', '<leader>s', ':ClangdSwitchSourceHeader<CR>', options)
-
-
 keymap('n', '<M-.>', ':try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>', options)
 keymap('i', '<M-.>', '<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>', options)
 keymap('n', '<M-,>', ':try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>', options)
 keymap('i', '<M-,>', ':try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>', options)
 keymap('n', '<leader>q', ':cclose<CR>', options)
 
+local function jai_format()
+    local job = require('plenary.job')
+    local current_file = vim.fn.expand('%:p')
+    job:new({
+        command = "jai-format",
+        args = { current_file },
+        cwd = vim.fn.getcwd(),
+        on_exit = function(j, return_val)
+            local callback = vim.schedule_wrap(function(file) 
+                print("Checking file: " .. file)
+                vim.api.nvim_command('checktime ' .. file)
+            end)
+            callback(current_file)
+        end,
+    }):start()
+end
+
+vim.api.nvim_create_user_command('JaiFormat', jai_format, {nargs = 0, desc = ''}) 
+
+--,%f:%l\\,%c:\ %m,%m\ (%f:%l),
 vim.cmd([[
     augroup AUTOCMD_GROUP
         autocmd!
-        autocmd BufWritePre *.c ClangFormat
-        autocmd BufWritePre *.h ClangFormat
-        autocmd BufWritePre *.cpp ClangFormat
-        autocmd BufWritePre *.hpp ClangFormat
-        autocmd BufEnter *.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+        autocmd BufEnter *.jai set errorformat=%f:%l\\,%c:\ Error:\ %m
+        autocmd BufWritePost *.jai JaiFormat
+        autocmd BufWritePre *.c,*.h,*.cpp,*.hpp ClangFormat
+        autocmd BufEnter,BufFilePost *.jai,*.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
         autocmd BufEnter *.* NvimTreeClose
-        autocmd BufFilePost *.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
     augroup END
 ]])
