@@ -33,7 +33,7 @@ require('yabs'):setup({
   },
   tasks = { -- Same values as `language.tasks`, but global
     build = {
-      command = 'build.bat',
+      command = 'jai ./first.jai',
       output = 'quickfix', -- Where to show output of the
       -- command. Can be `buffer`,
       -- `consolation`, `echo`,

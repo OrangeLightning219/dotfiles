@@ -45,17 +45,18 @@ cmp.setup({
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }, 
-  sources = cmp.config.sources({{ name = 'treesitter'}, { name = 'buffer', option = {
-                                                                              get_bufnrs = function()
-                                                                                return vim.api.nvim_list_bufs()
-                                                                              end
-                                                                            }}}),
-  -- sources = cmp.config.sources({{ name = 'treesitter' }},
-  --                              {{ name = 'buffer', option = {
-  --                                   get_bufnrs = function()
-  --                                     return vim.api.nvim_list_bufs()
-  --                                   end
-  --                                 } }}),
+  sources = cmp.config.sources({
+    { name = 'treesitter' }, 
+    -- { 
+    --   name = 'buffer', 
+    --   option = 
+    --   {
+    --     get_bufnrs = function()
+    --       return vim.api.nvim_list_bufs()
+    --     end
+    --   }
+    -- }
+  }),
   -- sources = cmp.config.sources( {
   --   { name = 'nvim_lsp',
   --     entry_filter = function(entry)
@@ -85,89 +86,6 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
-
-
-
--- local cpp_cmp = {}
-
--- local registered = false
--- cpp_cmp.setup = function()
---   if registered then
---     return
---   end
-
---   registered = true
-
---   local source = {}
-
---   source.new = function()
---     return setmetatable({}, {__index = source})
---   end
-
---   -- source.get_trigger_characters = function()
---   --   return {'.', '>', ':'}
---   -- end
-
---   source.get_keyword_pattern = function(self, params)
---     -- return [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\%(\w\|á\|Á\|é\|É\|í\|Í\|ó\|Ó\|ú\|Ú\)*\%(-\%(\w\|á\|Á\|é\|É\|í\|Í\|ó\|Ó\|ú\|Ú\)*\)*\)]]
---     return [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%([\-]\w*\)*\)]]
---   end
-
-
---   source.complete = function(self, request, callback)
-
---     local input = string.sub(request.context.cursor_before_line, 1, request.offset)
-
---     if request.completion_context.triggerCharacter ~= nil then
-
---       print("Trigger completion request")
---       -- print(vim.inspect(request))
---       local trigger = request.completion_context.triggerCharacter
---     else
---       print("Completion request")
---       -- print(vim.inspect(request))
---     end
---     print("Input: " .. input)
-
---     local items = {}
-
---     local completion_items = {'test1', 'test2', 'test3'}
-
---     for index, item in ipairs(completion_items) do
---       print("Adding "..item)
---       table.insert(items, {
---         filterText = 'Local Variable',
---         label = item,
---         -- textEdit = {
---         --   newText = item,
---         --   range = {
---         --     start = {
---         --       line = request.context.cursor.row - 1,
---         --       character = request.context.cursor.col - 1 - #input,
---         --     },
---         --     ['end'] = {
---         --       line = request.context.cursor.row - 1,
---         --       character = request.context.cursor.col - 1,
---         --     }
---         --   }
---         -- }
---       })
---     end
-
---     callback({items = items, isIncomplete = false})
-
---   end
-
---   cmp.register_source('nvim_cpp', source.new())
-
---   cmp.setup.filetype({'cpp', 'c', 'h', 'hpp'}, {sources = cmp.config.sources({{name = 'nvim_cpp'}})})
---   --, {name = 'buffer'}
-
--- end
-
--- cpp_cmp.setup()
-
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 

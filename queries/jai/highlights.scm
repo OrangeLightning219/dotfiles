@@ -1,28 +1,29 @@
 ; highlights.scm
+[
+  "if"
+  "#if"
+  "case"
+  "return"
+  "defer"
+  "else"
+  "for"
+  "while"
+  "using"
+  "struct"
+  "enum"
+  "inline"
+  "cast"
 
-"if" @keyword
-"#if" @keyword
-"case" @keyword
-"return" @keyword
-"defer" @keyword
-"else" @keyword
-"for" @keyword
-"while" @keyword
-"using" @keyword
-"struct" @keyword
-"enum" @keyword
-"inline" @keyword
-"cast" @keyword
-"cast" @keyword
-
-"#import" @keyword
-"#load" @keyword
-
-"#type_info_none" @keyword
-"#type_info_procedures_are_void_pointers" @keyword
-"#no_padding" @keyword
-"#must" @keyword
-"#module_parameters" @keyword
+  "#import"
+  "#load"
+  ;"#this"
+  "#insert" 
+  "#type_info_none"
+  "#type_info_procedures_are_void_pointers"
+  "#no_padding"
+  "#must"
+  "#module_parameters" 
+] @keyword
 
 (null_token) @constant
 (import_qualifier) @keyword

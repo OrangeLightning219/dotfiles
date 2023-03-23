@@ -37,6 +37,7 @@ Plug 'rcarriga/nvim-notify'
 Plug ('rose-pine/neovim', { as = 'rose-pine' })
 
 Plug "terrortylor/nvim-comment"
+Plug 'folke/todo-comments.nvim'
 
 Plug "pianocomposer321/yabs.nvim"
 

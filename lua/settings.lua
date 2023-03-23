@@ -53,6 +53,7 @@ keymap('n', '<C-h>',      '<C-w>h', options)
 keymap('n', '<C-l>',      '<C-w>l', options)
 keymap('n', '<C-j>',      '<C-w>j', options)
 keymap('n', '<C-k>',      '<C-w>k', options)
+keymap('n', '<leader>s',  '<C-w>x', options)
 
 options.silent = true
 
@@ -60,6 +61,7 @@ keymap( 'n', '<C-n>', ':NvimTreeToggle<CR>', options)
 
 keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
 keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
+keymap('n', '<leader>n', ':TodoTelescope<CR>', options)
 
 -- nvim-jai bindings
 keymap('n', '<leader>d', ':JaiFindDeclaration<CR>', options)
