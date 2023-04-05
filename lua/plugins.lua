@@ -47,4 +47,7 @@ Plug "pianocomposer321/yabs.nvim"
 -- Plug 'rluba/jai.vim'
 Plug 'OrangeLightning219/nvim-jai'
 
+Plug 'natecraddock/sessions.nvim'
+Plug 'natecraddock/workspaces.nvim'
+
 vim.call('plug#end')

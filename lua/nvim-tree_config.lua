@@ -8,7 +8,7 @@ require("nvim-tree").setup {
       hijack_cursor = true,
       hijack_unnamed_buffer_when_opening = true,
       ignore_buffer_on_setup = false,
-
+      sync_root_with_cwd = true,
       view = {
         adaptive_size = false,
         centralize_selection = false,

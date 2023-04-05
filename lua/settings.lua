@@ -77,6 +77,7 @@ keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(requi
 keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
 keymap('n', '<leader>d', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
 keymap('n', '<leader>e', ':Telescope diagnostics<CR>', options)
+keymap('n', '<leader>w', ':Telescope workspaces<CR>', options)
 
 -- nvim-jai bindings
 -- keymap('n', '<leader>d', ':JaiFindDeclaration<CR>', options)
