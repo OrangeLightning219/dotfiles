@@ -61,13 +61,37 @@ keymap( 'n', '<C-n>', ':NvimTreeToggle<CR>', options)
 
 keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
 keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
-keymap('n', '<leader>n', ':TodoTelescope<CR>', options)
+-- keymap('n', '<leader>n', ':TodoTelescope<CR>', options)
+
+-- keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.declaration()<CR>', options)
+-- keymap('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', options)
+keymap('n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>', options)
+keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', options)
+keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', options)
+keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', options)
+keymap( 'n', '<leader>gr', ':Telescope lsp_references<CR>', options)
+keymap( 'n', '<leader>gd', ':Telescope lsp_definitions<CR>', options)
+
+
+keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
+keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
+keymap('n', '<leader>d', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
+keymap('n', '<leader>e', ':Telescope diagnostics<CR>', options)
 
 -- nvim-jai bindings
-keymap('n', '<leader>d', ':JaiFindDeclaration<CR>', options)
+-- keymap('n', '<leader>d', ':JaiFindDeclaration<CR>', options)
 
-keymap('n', '<F5>', ':CompileJai<CR>', options)
-keymap('i', '<F5>', '<cmd>:CompileJai<CR>', options)
+function run_build_task()
+    -- vim.api.nvim_command("make")
+    -- vim.cmd("make")
+    vim.cmd("wa")
+    require('yabs'):run_task('build')
+end
+vim.api.nvim_create_user_command('RunBuildTask', run_build_task, {nargs = 0, desc = ''})
+
+
+keymap('n', '<F5>', ':RunBuildTask<CR>', options)
+keymap('i', '<F5>', '<cmd>:RunBuildTask<CR>', options)
 
 keymap('n', '<M-/>', ':CommentToggle<CR>', options)
 keymap('i', '<M-/>', '<Cmd>:CommentToggle<CR>', options)
@@ -109,6 +133,7 @@ vim.cmd([[
         autocmd BufWritePost *.jai JaiFormat
         autocmd BufWritePre *.c,*.h,*.cpp,*.hpp ClangFormat
         autocmd BufEnter,BufFilePost *.jai,*.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+        autocmd BufEnter,BufFilePost *.py :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
         autocmd BufEnter *.* NvimTreeClose
     augroup END
 ]])

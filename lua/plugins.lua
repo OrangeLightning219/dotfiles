@@ -15,6 +15,9 @@ Plug 'ray-x/cmp-treesitter'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug ('williamboman/mason.nvim', {['do'] = ':MasonUpdate'})
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug ('VonHeikemen/lsp-zero.nvim', {branch = 'v2.x'})
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
