@@ -1,148 +1,158 @@
 ; highlights.scm
-[
-  "if"
-  "#if"
-  "case"
-  "return"
-  "defer"
-  "else"
-  "for"
-  "while"
-  "using"
-  "struct"
-  "enum"
-  "inline"
-  "cast"
 
-  "#import"
-  "#load"
-  ;"#this"
-  "#insert" 
-  "#type_info_none"
-  "#type_info_procedures_are_void_pointers"
-  "#no_padding"
-  "#must"
-  "#module_parameters" 
-] @keyword
+(alias_if) @keyword
+(alias_then) @keyword
+(alias_case) @keyword
+(alias_return) @keyword
+(alias_defer) @keyword
+(alias_else) @keyword
+(alias_through) @keyword
+(alias_return) @keyword
+(alias_for) @keyword
+(alias_while) @keyword
+(alias_using) @keyword
+(alias_struct) @keyword
+(alias_continue) @keyword
+(alias_break) @keyword
+(alias_struct) @keyword
+(alias_enum) @keyword
+(alias_enum_flags) @keyword
+(alias_static_if) @keyword
+(alias_union) @keyword
+(alias_remove) @keyword
+(alias_assert) @keyword
+(alias_ifx) @keyword
 
-(null_token) @constant
-(import_qualifier) @keyword
-(expression_like_directive) @keyword
-(assert_directive token:"#assert" @keyword)
-(foreign_directive token:"#foreign" @keyword)
-(deprecated_directive token:"#deprecated" @keyword)
-(code_directive token:"#code" @keyword)
-("#complete") @keyword
-(run_statement_token) @keyword
-(operator_like_directive) @keyword
-(other_trailing_directive) @keyword
+(alias_import) @keyword
+(alias_dir) @keyword
+(alias_string) @keyword
+(alias_file) @keyword
+(alias_load) @keyword
 
-(file_scope_directive) @keyword
-(export_scope_directive) @keyword
-(module_scope_directive) @keyword
+(alias_add_op) @operator
+(alias_arith_add_op) @operator
+(alias_arith_div_op) @operator
+(alias_arith_mod_op) @operator
+(alias_arith_mul_op) @operator
+(alias_arith_sub_op) @operator
+(alias_assign_add_op) @operator
+(alias_assign_and_op) @operator
+(alias_assign_div_op) @operator
+(alias_assign_mod_op) @operator
+(alias_assign_mul_op) @operator
+(alias_assign_not_op) @operator
+(alias_assign_op) @operator
+(alias_assign_or_op) @operator
+(alias_assign_sub_op) @operator
+(alias_assign_xor_op) @operator
+(alias_bitwise_and_op) @operator
+(alias_bitwise_lsh_arith_op) @operator
+(alias_bitwise_lsh_op) @operator
+(alias_bitwise_or_op) @operator
+(alias_bitwise_rsh_arith_op) @operator
+(alias_bitwise_rsh_op) @operator
+(alias_bitwise_xor_op) @operator
+(alias_boolean_and_op) @operator
+(alias_boolean_eq_op) @operator
+(alias_boolean_ge_op) @operator
+(alias_boolean_gt_op) @operator
+(alias_boolean_le_op) @operator
+(alias_boolean_lt_op) @operator
+(alias_boolean_neq_op) @operator
+(alias_boolean_or_op) @operator
+(op_autocast) @operator
+(op_deref) @operator
+(op_ref) @operator
+(op_minus) @operator
+
+(alias_type_info_procedures_are_void_pointers) @keyword
+(alias_type_info_none) @keyword
+(alias_type_info_no_size_complaint) @keyword
+
+(alias_align) @keyword
+(alias_dump) @keyword
+
+(alias_type) @keyword
+
+(alias_no_padding_struct_mod) @keyword
+(alias_must) @keyword
 
 (string_literal) @string
-(boolean_literal) @boolean
-(here_string) @string
-(number) @number
+(boolean_literal) @constant
+(here_string_literal) @string
+(number_literal) @number
 (float_literal) @number
-(scientific_notation) @number
+(scientific_notation_literal) @number
 (built_in_type) @type.builtin
 
-(named_decl name:(identifier) @function (function_definition))
-(named_decl name:(identifier) @type.builtin (struct_definition))
-(named_decl name:(identifier) @type.builtin (enum_definition))
-(named_decl name:(identifier) @constant (const_initializer))
-(named_decl name:(identifier) @text (built_in_type))
-(named_decl name:(identifier) @text (unary_expression (pointer_to) @keyword (identifier) @type.builtin))
+(comment) @comment
 
-(named_decl name:(identifier) @text "=" (variable_initializer))
-(named_decl name:(identifier) @text ":" (identifier) @type.builtin)
+(alias_caller_location_literal) @keyword
+(alias_location_literal) @keyword
+(alias_file_literal) @keyword
+(alias_line_literal) @keyword
+(alias_filepath_literal) @keyword
 
-(unary_expression "." (identifier) @constant)
+(alias_down_for_mod) @operator
+(alias_variant_array) @operator
 
-(named_decl name:(identifier) @text (variable_initializer))
-(inline_comment) @comment
-(block_comment) @comment
-(func_call name:(identifier) @function)
-(func_call (member_access (identifier) @text (identifier) @function))
+(alias_cast) @keyword
+(alias_c_call) @keyword
+(alias_compiler) @keyword
+(alias_complete) @keyword
+(alias_dump) @keyword
+(alias_expand) @keyword
+(alias_inline) @keyword
+(alias_inline) @keyword
+(alias_intrinsic) @keyword
+(alias_no_abc) @keyword
+(alias_no_alias) @keyword
+(alias_no_check_cast_mod) @keyword
+(alias_no_context) @keyword
+(alias_no_padding_struct_mod) @keyword
+(alias_op_splat) @keyword
+(alias_runtime_support) @keyword
+(alias_splat) @keyword
+(alias_string) @keyword
+(alias_symmetric) @keyword
+(alias_trunc_cast_mod) @keyword
+(alias_type) @keyword
+(alias_type_info_procedures_are_void_pointers) @keyword
+(alias_type_isa) @keyword
+(alias_type_ptr) @keyword
+(alias_splat) @keyword
+(alias_using) @keyword
+"." @punctuation.bracket
+"," @punctuation.bracket
+";" @punctuation.bracket
+":" @punctuation.bracket
+"[" @punctuation.bracket
+"]" @punctuation.bracket
+"(" @punctuation.bracket
+")" @punctuation.bracket
+"{" @punctuation.bracket
+"}" @punctuation.bracket
+":=" @operator
+"::" @operator
 
-(parameter (identifier) @constant ":")
-(parameter (identifier) @constant ":" (identifier) @type.builtin)
-(parameter (identifier) @constant (built_in_type) @type.builtin)
-(parameter (identifier) @constant (typed_struct_literal))
+(single_function_decl_shape name:(identifier) @function)
+(single_struct_decl_shape name:(identifier) @type)
+(single_enum_decl_shape name:(identifier) @type)
+(single_union_decl_shape name:(identifier) @type)
+(single_constant_decl_shape name:(identifier) @constant)
+(multi_variable_decl_shape name:(identifier) @variable)
+(single_variable_decl_shape name:(identifier) @variable type:(_) @type)
+(single_variable_decl_shape name:(identifier) @variable value:(_))
+(cast_expression type:(_) @type)
+(named_function_parameter name:(identifier) @variable type:(_) @type)
+(named_function_parameter name:(identifier) @variable initial:(_))
+(return_parameter type:(_) @type)
+(for_statement iterator:(identifier) @variable)
+(call_expression function:(identifier) @function)
+(import_statement import_as:(identifier) @variable)
+(assignment_statement lhs:(identifier) @variable)
+(return_statement argument:(argument_shape (identifier) @variable))
+(for_statement expr:(identifier) @variable)
 
-(parameter (identifier) @constant (unary_expression (pointer_to) @keyword (identifier) @type.builtin))
-(parameter (identifier) @constant (unary_expression (pointer_to) @keyword (built_in_type) @type.builtin))
-
-(parameter (identifier) @constant (unary_expression (array_decl) @keyword (identifier) @type.builtin))
-(parameter (identifier) @constant (unary_expression (array_decl) @keyword (unary_expression (pointer_to) @keyword (identifier) @type.builtin)))
-(parameter (identifier) @constant (unary_expression (array_decl) @keyword (built_in_type) @type.builtin))
-(parameter (identifier) @constant (unary_expression (array_decl) @keyword (unary_expression (pointer_to) @keyword (built_in_type) @type.builtin)))
-
-(trailing_return_types (parameter (identifier) @function.builtin ))
-(trailing_return_types (parameter (built_in_type) @function.builtin ))
-(trailing_return_types (parameter (unary_expression (pointer_to) @keyword (identifier) @function.builtin )))
-(trailing_return_types (parameter (identifier) @constant ":" (identifier) @function.builtin))
-(trailing_return_types (parameter (identifier) @constant (built_in_type) @function.builtin))
-(trailing_return_types (parameter (identifier) @constant (typed_struct_literal)))
-
-(trailing_return_types (parameter (identifier) @constant (unary_expression (pointer_to) @keyword (identifier) @function.builtin)))
-(trailing_return_types (parameter (identifier) @constant (unary_expression (pointer_to) @keyword (built_in_type) @function.builtin)))
-
-(trailing_return_types (parameter (identifier) @constant (unary_expression (array_decl) @keyword (identifier) @function.builtin)))
-(trailing_return_types (parameter (identifier) @constant (unary_expression (array_decl) @keyword (unary_expression (pointer_to) @keyword (identifier) @function.builtin))))
-(trailing_return_types (parameter (identifier) @constant (unary_expression (array_decl) @keyword (built_in_type) @function.builtin)))
-(trailing_return_types (parameter (identifier) @constant (unary_expression (array_decl) @keyword (unary_expression (pointer_to) @keyword (built_in_type) @function.builtin))))
-
-(typed_struct_literal (identifier) @type.builtin)
-; (for_loop name:(identifier) @variable)
-
-
-
-[
-  "-"
-  "+"
-  "!"
-  "<<"
-  "~"
-  "xx"
-  "xx,no_check"
-  ".."
-  "."
-  "$"
-  "="
-
-  "=="
-  "!="
-  "/" 
-  "*"
-
-  ">"
-  "<"
-  ">="
-  "<="
-
-  ;"+="
-  ;"-="
-  ;"/="
-  ;"*="
-  ;"|="
-  ;"&="
-  ;"^="
-  ;"%="
-  ;":="
-
-  "->"
-  "::"
-  ":"
-  "!="
-  "||"
-  "&&"
-  "|" 
-  "&" 
-  "^" 
-  "%" 
-] @operator
-
-[ "(" ")" "[" "]" "{" "}" ";" "," ] @punctuation.bracket
+(_type_expression) @type
+(enum_identifier) @constant

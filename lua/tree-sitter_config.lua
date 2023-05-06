@@ -3,7 +3,7 @@ require 'nvim-treesitter.install'.compilers = { "cl", "clang", "gcc" }
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.jai = {
   install_info = {
-    url = "E:/Tools/tree-sitter-jai", 
+    url = "https://github.com/adragomir/tree-sitter-jai", 
     files = {"src/parser.c", "src/scanner.cc"},
   },
   filetype = "jai", 

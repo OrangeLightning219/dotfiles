@@ -47,6 +47,7 @@ require('rose-pine').setup({
         ['@repeat'] = {fg = '#8981d6'},
         ['@conditional'] = {fg = '#8981d6'},
         ['@operator'] = {fg = '#8981d6'},
+        ['@delimiter'] = {fg = 'muted'},
         ['@keyword.operator'] = {fg = '#8981d6'},
         ['@boolean'] = {fg = '#8981d6'},
         ['@include'] = {fg = '#8981d6'},
