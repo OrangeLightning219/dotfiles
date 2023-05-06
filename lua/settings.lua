@@ -41,7 +41,9 @@ vim.opt.linebreak = true
 vim.opt.number = true
 vim.opt.signcolumn = 'yes'
 
-vim.opt.guifont = { 'CaskaydiaCove NF', ':h11' }
+-- vim.opt.guifont = { 'CaskaydiaCove NF', ':h11' }
+-- vim.opt.guifont = { 'Iosevka NF', ':h16' }
+vim.opt.guifont = { 'JetBrainsMono NF', ':h12' }
 
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }

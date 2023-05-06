@@ -84,6 +84,16 @@ cmp.setup.cmdline(':', {
   })
 })
 
+local configs = require("lspconfig.configs")
+local util = require("lspconfig.util")
+
+configs.jails = {
+    default_config = {
+        cmd = { "jails" },
+        filetypes = { "jai" },
+        root_dir = util.path.dirname,
+    },
+}
 
 local lsp = require('lsp-zero')
 
@@ -96,6 +106,7 @@ lsp.preset({
   manage_nvim_cmp = false,
 })
 
+vim.lsp.set_log_level("debug")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -104,8 +115,12 @@ require('lspconfig').clangd.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').pyright.setup({
+require('lspconfig').pyright.setup({})
 
+require('lspconfig').jails.setup({
+  root_dir = function(fname)
+    return vim.fn.getcwd()
+  end
 })
 
 lsp.on_attach(function(client, bufnr)
