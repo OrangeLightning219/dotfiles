@@ -19,8 +19,8 @@ Plug ('williamboman/mason.nvim', {['do'] = ':MasonUpdate'})
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug ('VonHeikemen/lsp-zero.nvim', {branch = 'v2.x'})
 
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'nvim-lua/plenary.nvim'

@@ -43,7 +43,11 @@ vim.opt.signcolumn = 'yes'
 
 -- vim.opt.guifont = { 'CaskaydiaCove NF', ':h11' }
 -- vim.opt.guifont = { 'Iosevka NF', ':h16' }
-vim.opt.guifont = { 'JetBrainsMono NF', ':h12' }
+if vim.fn.has('macunix') then
+    vim.opt.guifont = { 'JetBrainsMono Nerd Font Mono', ':h12' }
+else
+    vim.opt.guifont = { 'JetBrainsMono NF', ':h12' }
+end
 
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }
@@ -100,8 +104,8 @@ keymap('n', '<M-/>', ':CommentToggle<CR>', options)
 keymap('i', '<M-/>', '<Cmd>:CommentToggle<CR>', options)
 keymap('v', '<M-/>', ':CommentToggle<CR>', options)
 
-keymap('n', '<C-s>', ':wa<CR>', options)
-keymap('i', '<C-s>', '<Cmd>:wa<CR>', options)
+keymap('n', '<C-s>', ':wa!<CR>', options)
+keymap('i', '<C-s>', '<Cmd>:wa!<CR>', options)
 
 keymap('n', '<M-.>', ':try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>', options)
 keymap('i', '<M-.>', '<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>', options)

@@ -9,8 +9,7 @@ parser_config.jai = {
   filetype = "jai", 
 }
 
-local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
-ft_to_parser.jai = "jai"
+vim.treesitter.language.register("jai", "jai")
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "html", "jai",
