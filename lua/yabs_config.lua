@@ -1,18 +1,17 @@
+local jai_exe = "jai"
+if vim.fn.has('macunix') then
+    jai_exe = "jai-macos"
+end
+
 require('yabs'):setup({
-  languages = { -- List of languages in vim's `filetype` format
+  languages = {
     cpp = {
       default_task = 'build',
       tasks = {
         build = {
           command = 'build.bat',
-          output = 'quickfix', -- Where to show output of the
-          -- command. Can be `buffer`,
-          -- `consolation`, `echo`,
-          -- `quickfix`, `terminal`, or `none`
-          opts = { -- Options for output (currently, there's only
-            -- `open_on_run`, which defines the behavior
-            -- for the quickfix list opening) (can be
-            -- `never`, `always`, or `auto`, the default)
+          output = 'quickfix',
+          opts = {
             open_on_run = 'auto',
           },
         },
@@ -22,7 +21,7 @@ require('yabs'):setup({
       default_task = 'build',
       tasks = {
         build = {
-          command = 'jai ./first.jai',
+          command = jai_exe .. ' ./first.jai',
           output = 'quickfix', 
           opts = {
             open_on_run = 'auto',
@@ -33,15 +32,9 @@ require('yabs'):setup({
   },
   tasks = { -- Same values as `language.tasks`, but global
     build = {
-      command = 'jai ./first.jai',
-      output = 'quickfix', -- Where to show output of the
-      -- command. Can be `buffer`,
-      -- `consolation`, `echo`,
-      -- `quickfix`, `terminal`, or `none`
-      opts = { -- Options for output (currently, there's only
-        -- `open_on_run`, which defines the behavior
-        -- for the quickfix list opening) (can be
-        -- `never`, `always`, or `auto`, the default)
+      command = jai_exe .. ' ./first.jai',
+      output = 'quickfix',
+      opts = {
         open_on_run = 'auto',
       },
     }
