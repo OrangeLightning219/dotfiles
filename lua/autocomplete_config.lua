@@ -117,11 +117,13 @@ require('lspconfig').clangd.setup({
 
 require('lspconfig').pyright.setup({})
 
-require('lspconfig').jails.setup({
-  root_dir = function(fname)
-    return vim.fn.getcwd()
-  end
-})
+if not (vim.fn.has('macunix')) then
+    require('lspconfig').jails.setup({
+      root_dir = function(fname)
+        return vim.fn.getcwd()
+      end
+    })
+end
 
 lsp.on_attach(function(client, bufnr)
   -- lsp.default_keymaps({buffer = bufnr})
