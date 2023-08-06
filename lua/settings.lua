@@ -41,12 +41,14 @@ vim.opt.linebreak = true
 vim.opt.number = true
 vim.opt.signcolumn = 'yes'
 
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- vim.opt.guifont = { 'CaskaydiaCove NF', ':h11' }
 -- vim.opt.guifont = { 'Iosevka NF', ':h16' }
 if vim.fn.has('macunix') then
     vim.opt.guifont = { 'JetBrainsMono Nerd Font Mono', ':h12' }
 else
-    vim.opt.guifont = { 'JetBrainsMono NF', ':h12' }
+    vim.opt.guifont = { 'JetBrainsMono NF', ':h11' }
 end
 
 local keymap = vim.api.nvim_set_keymap
@@ -83,7 +85,9 @@ keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').find_files(requi
 keymap('n', '<leader>t', ':Telescope live_grep<CR>', options)
 keymap('n', '<leader>d', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
 keymap('n', '<leader>e', ':Telescope diagnostics<CR>', options)
-keymap('n', '<leader>w', ':Telescope workspaces<CR>', options)
+-- keymap('n', '<leader>w', ':Telescope workspaces<CR>', options)
+keymap('n', '<leader>w', ':Telescope session-lens<CR>', options)
+keymap('n', '<leader>q', ':EvenSplits<CR>', options)
 
 -- nvim-jai bindings
 -- keymap('n', '<leader>d', ':JaiFindDeclaration<CR>', options)
@@ -132,6 +136,12 @@ end
 
 vim.api.nvim_create_user_command('JaiFormat', jai_format, {nargs = 0, desc = ''}) 
 
+local function even_splits()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", true, false, true), 'n', false)
+end
+
+vim.api.nvim_create_user_command('EvenSplits', even_splits, {nargs = 0, desc = ''}) 
+
 --,%f:%l\\,%c:\ %m,%m\ (%f:%l),
 vim.cmd([[
     augroup AUTOCMD_GROUP
@@ -141,6 +151,6 @@ vim.cmd([[
         autocmd BufWritePre *.c,*.h,*.cpp,*.hpp ClangFormat
         autocmd BufEnter,BufFilePost *.jai,*.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
         autocmd BufEnter,BufFilePost *.py :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
-        autocmd BufEnter *.* NvimTreeClose
     augroup END
 ]])
+        -- autocmd BufEnter *.* NvimTreeClose

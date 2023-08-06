@@ -106,7 +106,7 @@ lsp.preset({
   manage_nvim_cmp = false,
 })
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 

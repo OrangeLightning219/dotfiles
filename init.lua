@@ -1,14 +1,15 @@
 require("plugins")
+require("settings")
 
 require("autocomplete_config")
 require("lualine_config")
 require("tree-sitter_config")
-require("nvim-tree_config")
+-- require("nvim-tree_config")
 require("neogit_config")
 require("nvim-comment_config")
 require("todo_config")
-require("sessions_config")
 require("telescope_config")
+require("sessions_config")
 require("rose-pine_config")
 require("yabs_config")
 -- require("nvim-cpp").setup()
@@ -18,4 +19,3 @@ require("yabs_config")
 
 -- require("nvim-jai").setup()
 
-require("settings")
