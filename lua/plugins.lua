@@ -1,54 +1,67 @@
-local Plug = vim.fn["plug#"]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-vim.call("plug#begin", "$XDG_CONFIG_HOME/nvim/autoload")
+plugins = {
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/playground",
 
-Plug "nvim-treesitter/nvim-treesitter"
--- Plug "nvim-treesitter/nvim-treesitter-refactor"
-Plug "nvim-treesitter/playground"
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "ray-x/cmp-treesitter",
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-vsnip",
+    "hrsh7th/vim-vsnip",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "VonHeikemen/lsp-zero.nvim",
 
-Plug "neovim/nvim-lspconfig"
-Plug "hrsh7th/cmp-nvim-lsp"
-Plug "hrsh7th/cmp-buffer"
-Plug "hrsh7th/cmp-path"
-Plug "hrsh7th/cmp-cmdline"
-Plug "ray-x/cmp-treesitter"
-Plug "hrsh7th/nvim-cmp"
-Plug "hrsh7th/cmp-vsnip"
-Plug "hrsh7th/vim-vsnip"
-Plug ("williamboman/mason.nvim", {["do"] = ":MasonUpdate"})
-Plug "williamboman/mason-lspconfig.nvim"
-Plug ("VonHeikemen/lsp-zero.nvim", {branch = "v2.x"})
+    "nvim-tree/nvim-web-devicons",
+    "nvim-lualine/lualine.nvim",
 
-Plug "nvim-tree/nvim-web-devicons"
-Plug "nvim-lualine/lualine.nvim"
+    {
+        "nvim-telescope/telescope.nvim", tag = "0.1.2",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
 
-Plug "nvim-lua/plenary.nvim"
-Plug ("nvim-telescope/telescope.nvim", { tag = "0.1.2" })
-Plug ("nvim-telescope/telescope-fzf-native.nvim", { ["do"] = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" })
+    "kdheepak/lazygit.nvim",
+    "lewis6991/gitsigns.nvim",
 
--- Plug "TimUntersberger/neogit"
-Plug "kdheepak/lazygit.nvim"
+    "lukas-reineke/indent-blankline.nvim",
 
-Plug "kalvinpearce/ShaderHighlight"
+    "kalvinpearce/ShaderHighlight",
 
-Plug "Raimondi/delimitMate"
+    "Raimondi/delimitMate",
 
-Plug "rhysd/vim-clang-format"
+    "rhysd/vim-clang-format",
 
-Plug "rcarriga/nvim-notify"
+    "rcarriga/nvim-notify",
 
-Plug ("rose-pine/neovim", { as = "rose-pine" })
+    { 'rose-pine/neovim', name = 'rose-pine' },
 
-Plug "terrortylor/nvim-comment"
-Plug "folke/todo-comments.nvim"
+    "terrortylor/nvim-comment",
+    "folke/todo-comments.nvim",
 
-Plug "pianocomposer321/yabs.nvim"
+    "pianocomposer321/yabs.nvim",
 
--- Plug "rluba/jai.vim"
-Plug "OrangeLightning219/nvim-jai"
+    "nvim-tree/nvim-tree.lua",
 
-Plug "nvim-tree/nvim-tree.lua"
+    "rmagatti/auto-session",
+}
+options = {}
 
-Plug "rmagatti/auto-session"
 
-vim.call("plug#end")
+require("lazy").setup(plugins, options)

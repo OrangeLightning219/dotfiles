@@ -1,6 +1,5 @@
 vim.cmd([[
     syntax on
-    colorscheme rose-pine
 ]])
 
 vim.g.mapleader = " "
