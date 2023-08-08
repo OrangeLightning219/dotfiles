@@ -126,7 +126,6 @@ end
 
 vim.api.nvim_create_user_command("EvenSplits", even_splits, {nargs = 0, desc = ""}) 
 
---,%f:%l\\,%c:\ %m,%m\ (%f:%l),
 vim.cmd([[
     augroup AUTOCMD_GROUP
         autocmd!
@@ -137,5 +136,3 @@ vim.cmd([[
         autocmd BufEnter,BufFilePost *.py :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
     augroup END
 ]])
-        -- autocmd BufEnter *.* NvimTreeClose
-        -- autocmd BufEnter * EvenSplits

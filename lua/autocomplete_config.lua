@@ -17,72 +17,42 @@ local function close_completion_window(moveUp)
 end
 
 cmp.setup({
-  view = {                                                
-    entries = {name = "wildmenu", separator = "|" }       
-  },
-  snippet = {
+    view = {                                                
+        entries = {name = "wildmenu", separator = "|" }       
+    },
+    snippet = {
     -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-    end,
-  },
-  mapping = {
-    ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-    ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-    ["<Down>"] = cmp.mapping(function ()
-                              close_completion_window(false)
-                             end),
-    ["<Up>"] = cmp.mapping(function ()
-                              close_completion_window(true)
-                           end),
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ["<C-e>"] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-  }, 
-  sources = cmp.config.sources({
-    -- { name = "treesitter" },
-    { 
-      name = "nvim_lsp",
-      entry_filter = function(entry)
-                       return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
-                     end 
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        end,
+    },
+    mapping = {
+        ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<Down>"] = cmp.mapping(function ()
+                                    close_completion_window(false)
+                                end),
+        ["<Up>"] = cmp.mapping(function ()
+                                close_completion_window(true)
+                               end),
     }, 
+    sources = cmp.config.sources({
     { 
-      name = "buffer", 
-      option = 
-      {
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      }
-    }
-  }),
-  experimental = {
-    ghost_text = true
-  }
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won"t work anymore).
-cmp.setup.cmdline("/", {
-  sources = {
+        name = "nvim_lsp",
+        entry_filter = function(entry)
+                           return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+                       end 
+    }, 
     { name = "buffer" }
-  }
+    }),
+    experimental = {
+        ghost_text = true
+    }
 })
 
--- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
-cmp.setup.cmdline(":", {
-  sources = cmp.config.sources({
-    { name = "path" }
-  }, {
-    { name = "cmdline" }
-  })
-})
+cmp.setup.cmdline("/", {sources = {{ name = "buffer" }}})
+
+cmp.setup.cmdline(":", {sources = cmp.config.sources({{ name = "path" }}, {{ name = "cmdline" }})})
 
 local configs = require("lspconfig.configs")
 local util = require("lspconfig.util")
@@ -98,12 +68,12 @@ configs.jails = {
 local lsp = require("lsp-zero")
 
 lsp.preset({
-  float_border = "rounded",
-  call_servers = "local",
-  configure_diagnostics = true,
-  setup_servers_on_start = false,
-  set_lsp_keymaps = false,
-  manage_nvim_cmp = false,
+    float_border = "rounded",
+    call_servers = "local",
+    configure_diagnostics = true,
+    setup_servers_on_start = false,
+    set_lsp_keymaps = false,
+    manage_nvim_cmp = false,
 })
 
 -- vim.lsp.set_log_level("debug")
@@ -111,17 +81,17 @@ lsp.preset({
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 require("lspconfig").clangd.setup({
-  cmd = {"clangd", "--header-insertion=never"},
-  capabilities = capabilities,
+    cmd = {"clangd", "--header-insertion=never"},
+    capabilities = capabilities,
 })
 
 require("lspconfig").pyright.setup({})
 
 if not (vim.fn.has("macunix")) then
     require("lspconfig").jails.setup({
-      root_dir = function(fname)
-        return vim.fn.getcwd()
-      end
+        root_dir = function(fname)
+            return vim.fn.getcwd()
+        end
     })
 end
 
