@@ -20,7 +20,7 @@ parser_config.jai = {
 
 vim.treesitter.language.register("jai", "jai")
 
-require"nvim-treesitter.configs".setup {
+require("nvim-treesitter.configs").setup {
     ensure_installed = {
         "c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "html", "jai",
         "java", "javascript", "json", "lua", "make", "markdown", "python", "vim", "yaml"
@@ -38,28 +38,28 @@ require"nvim-treesitter.configs".setup {
 
 -- =================================================================================
 
-require("nvim-tree").setup({
-    disable_netrw = true,
-    hijack_cursor = true,
-    hijack_unnamed_buffer_when_opening = true,
-    sync_root_with_cwd = true,
-    view = {
-        width = "17%",
-    },
-    renderer = {
-        highlight_git = true,
-    },
-})
+-- require("nvim-tree").setup({
+--     disable_netrw = true,
+--     hijack_cursor = true,
+--     hijack_unnamed_buffer_when_opening = true,
+--     sync_root_with_cwd = true,
+--     view = {
+--         width = "17%",
+--     },
+--     renderer = {
+--         highlight_git = true,
+--     },
+-- })
 
 -- =================================================================================
 
 local function handle_nvim_tree()
-    nvim_tree = require("nvim-tree.api")
-    for i, buffer in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_is_loaded(buffer) and nvim_tree.tree.is_tree_buf(buffer) then
-            nvim_tree.tree.open()
-        end
-    end
+    -- nvim_tree = require("nvim-tree.api")
+    -- for i, buffer in ipairs(vim.api.nvim_list_bufs()) do
+    --     if vim.api.nvim_buf_is_loaded(buffer) and nvim_tree.tree.is_tree_buf(buffer) then
+    --         nvim_tree.tree.open()
+    --     end
+    -- end
 end
 
 require("auto-session").setup({
