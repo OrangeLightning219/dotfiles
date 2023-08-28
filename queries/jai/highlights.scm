@@ -134,6 +134,8 @@
 "}" @punctuation.bracket
 ":=" @operator
 "::" @operator
+"=>" @operator
+"==" @operator
 
 (single_function_decl_shape name:(identifier) @function)
 (single_struct_decl_shape name:(identifier) @type)

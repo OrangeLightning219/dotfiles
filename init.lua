@@ -105,7 +105,7 @@ vim.cmd('colorscheme rose-pine')
 
 local jai_exe = "jai"
 if vim.fn.has("macunix") then
-    jai_exe = "jai-macos"
+    -- jai_exe = "jai-macos"
 end
 
 require("yabs"):setup({
