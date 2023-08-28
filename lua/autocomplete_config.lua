@@ -65,17 +65,6 @@ configs.jails = {
     },
 }
 
-local lsp = require("lsp-zero")
-
-lsp.preset({
-    float_border = "rounded",
-    call_servers = "local",
-    configure_diagnostics = true,
-    setup_servers_on_start = false,
-    set_lsp_keymaps = false,
-    manage_nvim_cmp = false,
-})
-
 -- vim.lsp.set_log_level("debug")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -95,11 +84,6 @@ if not (vim.fn.has("macunix")) then
     })
 end
 
-lsp.on_attach(function(client, bufnr)
-  -- lsp.default_keymaps({buffer = bufnr})
-end)
-
-lsp.setup()
 
 local function lsp_symbol(name, icon)
   vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, texthl = "Diagnostic" .. name })

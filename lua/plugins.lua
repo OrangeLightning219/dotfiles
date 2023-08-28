@@ -24,9 +24,6 @@ plugins = {
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "VonHeikemen/lsp-zero.nvim",
 
     "nvim-tree/nvim-web-devicons",
     "nvim-tree/nvim-tree.lua",
@@ -44,7 +41,6 @@ plugins = {
     "kdheepak/lazygit.nvim",
     "lewis6991/gitsigns.nvim",
 
-    "lukas-reineke/indent-blankline.nvim",
     "terrortylor/nvim-comment",
     "folke/todo-comments.nvim",
     "Raimondi/delimitMate",

@@ -133,7 +133,6 @@ require("yabs"):setup({
 -- =================================================================================
 
 require("nvim_comment").setup({ comment_empty = false })
-require("indent_blankline").setup({ show_first_indent_level = false })
 require("gitsigns").setup()
 require("lualine").setup({ options = { theme = "material" }})
 require("todo-comments").setup({
