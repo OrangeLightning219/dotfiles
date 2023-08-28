@@ -20,7 +20,7 @@ parser_config.jai = {
 
 vim.treesitter.language.register("jai", "jai")
 
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "html", "jai",
         "java", "javascript", "json", "lua", "make", "markdown", "python", "vim", "yaml"
@@ -34,7 +34,7 @@ require("nvim-treesitter.configs").setup {
     playground = {
         enable = true,
     }
-}
+})
 
 -- =================================================================================
 
