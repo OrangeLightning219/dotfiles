@@ -26,7 +26,11 @@ plugins = {
     "hrsh7th/vim-vsnip",
 
     "nvim-tree/nvim-web-devicons",
-    "nvim-tree/nvim-tree.lua",
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = { "MunifTanjim/nui.nvim" }
+    },
     "nvim-lualine/lualine.nvim",
 
     {

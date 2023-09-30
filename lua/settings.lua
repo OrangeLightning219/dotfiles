@@ -64,7 +64,7 @@ keymap("n", "<leader>s",  "<C-w>x", options)
 
 options.silent = true
 
-keymap("n", "<leader>1", ":NvimTreeToggle<CR>", options)
+keymap("n", "<leader>1", ":Neotree toggle<CR>", options)
 
 keymap("n", "<leader>n",  "<cmd>lua vim.lsp.buf.rename()<CR>", options)
 keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)

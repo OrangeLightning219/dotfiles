@@ -38,33 +38,20 @@ require("nvim-treesitter.configs").setup({
 
 -- =================================================================================
 
--- require("nvim-tree").setup({
---     disable_netrw = true,
---     hijack_cursor = true,
---     hijack_unnamed_buffer_when_opening = true,
---     sync_root_with_cwd = true,
---     view = {
---         width = "17%",
---     },
---     renderer = {
---         highlight_git = true,
---     },
--- })
+require("neo-tree").setup({
+  filesystem = {
+    filtered_items = {
+      always_show = {
+        ".gitignore"
+      }
+    }
+  }
+})
 
 -- =================================================================================
 
-local function handle_nvim_tree()
-    -- nvim_tree = require("nvim-tree.api")
-    -- for i, buffer in ipairs(vim.api.nvim_list_bufs()) do
-    --     if vim.api.nvim_buf_is_loaded(buffer) and nvim_tree.tree.is_tree_buf(buffer) then
-    --         nvim_tree.tree.open()
-    --     end
-    -- end
-end
-
 require("auto-session").setup({
     auto_save_enabled = true,
-    post_restore_cmds = {handle_nvim_tree}
 })
 
 require("telescope").load_extension("session-lens")
