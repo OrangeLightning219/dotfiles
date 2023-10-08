@@ -12,35 +12,29 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 plugins = {
+    "dstein64/vim-startuptime",
+    "nathom/filetype.nvim",
+
     "nvim-treesitter/nvim-treesitter",
-    "nvim-treesitter/playground",
+    -- "nvim-treesitter/playground",
 
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
-    "ray-x/cmp-treesitter",
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/vim-vsnip",
+    -- "hrsh7th/cmp-nvim-lsp-signature-help",
+    "onsails/lspkind.nvim",
+    -- "hrsh7th/cmp-vsnip",
+    -- "hrsh7th/vim-vsnip",
 
     "nvim-tree/nvim-web-devicons",
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = { "MunifTanjim/nui.nvim" }
-    },
+    { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = { "MunifTanjim/nui.nvim" } },
     "nvim-lualine/lualine.nvim",
 
-    {
-        "nvim-telescope/telescope.nvim", tag = "0.1.2",
-        dependencies = { "nvim-lua/plenary.nvim" }
-    },
-    { 
-        "nvim-telescope/telescope-fzf-native.nvim", 
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" 
-    },
+    { "nvim-telescope/telescope.nvim", tag = "0.1.2", dependencies = { "nvim-lua/plenary.nvim" } },
+    {  "nvim-telescope/telescope-fzf-native.nvim",  build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
 
     "kdheepak/lazygit.nvim",
     "lewis6991/gitsigns.nvim",
@@ -57,7 +51,7 @@ plugins = {
 
     "pianocomposer321/yabs.nvim",
 
-    "rmagatti/auto-session",
+    -- "rmagatti/auto-session",
 }
 options = {}
 

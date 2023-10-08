@@ -39,15 +39,16 @@ vim.opt.softtabstop = 4
 vim.opt.linebreak = true
 vim.opt.number = true
 vim.opt.signcolumn = "yes"
+vim.opt.pumheight = 10
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,resize"
 
--- vim.opt.guifont = { "CaskaydiaCove NF", ":h11" }
--- vim.opt.guifont = { "Iosevka NF", ":h16" }
-if vim.fn.has("macunix") then
+if vim.fn.has("macunix") ~= 0 then
     vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h12" }
 else
-    vim.opt.guifont = { "JetBrainsMono NF", ":h11" }
+vim.opt.guifont = { "FiraCode Nerd Font", ":h14" }
+-- vim.opt.guifont = { "CaskaydiaCove NF", ":h12" }
+    -- vim.opt.guifont = { "JetBrainsMono NF", ":h12" }
 end
 
 local keymap = vim.api.nvim_set_keymap
