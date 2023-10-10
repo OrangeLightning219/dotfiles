@@ -125,15 +125,17 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ["<Down>"] = cmp.mapping(function () close_completion_window(false) end),
         ["<Up>"] = cmp.mapping(function () close_completion_window(true) end),
+        ['<CR>'] = cmp.mapping.confirm({ select = true })
     }, 
     sources = cmp.config.sources({
-        { name = "nvim_lsp", entry_filter = snippets_filter, allow_duplicates = false, dup = 0 }, 
+        { name = "nvim_lsp", entry_filter = snippets_filter }, 
         -- { name = 'nvim_lsp_signature_help' },
-        { name = "buffer", allow_duplicates = false, dup = 0 }
+        { name = "buffer" }
     }),
     experimental = {
         ghost_text = true
-    }
+    },
+    snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end },
 })
 
 cmp.setup.cmdline("/", {sources = {{ name = "buffer" }}})
