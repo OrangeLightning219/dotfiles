@@ -32,8 +32,8 @@ plugins = {
     { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = { "MunifTanjim/nui.nvim" } },
     "nvim-lualine/lualine.nvim",
 
-    { "nvim-telescope/telescope.nvim", tag = "0.1.2", dependencies = { "nvim-lua/plenary.nvim" } },
-    {  "nvim-telescope/telescope-fzf-native.nvim",  build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
+    { "nvim-telescope/telescope.nvim", tag = "0.1.4", dependencies = { "nvim-lua/plenary.nvim" } },
+    { "nvim-telescope/telescope-fzf-native.nvim",  build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
 
     "kdheepak/lazygit.nvim",
     "lewis6991/gitsigns.nvim",
@@ -51,6 +51,15 @@ plugins = {
     "pianocomposer321/yabs.nvim",
 
     -- "rmagatti/auto-session",
+    {
+        "coffebar/neovim-project",
+        init = function()
+          vim.opt.sessionoptions:append("globals")
+        end,
+        dependencies = { { "Shatur/neovim-session-manager" } },
+        lazy = false,
+        priority = 100,
+      },
 }
 options = {}
 

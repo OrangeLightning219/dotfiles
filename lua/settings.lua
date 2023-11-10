@@ -48,15 +48,13 @@ if vim.fn.has("macunix") ~= 0 then
 else
 vim.opt.guifont = { "FiraCode Nerd Font", ":h14" }
 -- vim.opt.guifont = { "CaskaydiaCove NF", ":h12" }
-    -- vim.opt.guifont = { "JetBrainsMono NF", ":h12" }
+-- vim.opt.guifont = { "JetBrainsMono NF", ":h12" }
 end
 
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }
 
 keymap("n", "<leader>r",  "@:", options)
-keymap("n", "<Tab>",      ":bn<CR>", options)
-keymap("n", "<S-Tab>",    ":bp<CR>", options)
 keymap("n", "<C-h>",      "<C-w>h", options)
 keymap("n", "<C-l>",      "<C-w>l", options)
 keymap("n", "<C-j>",      "<C-w>j", options)
@@ -77,7 +75,7 @@ keymap("n", "<leader>f",  "<cmd>lua require('telescope.builtin').find_files(requ
 keymap("n", "<leader>t",  ":Telescope live_grep<CR>", options)
 keymap("n", "<leader>d",  ":Telescope lsp_dynamic_workspace_symbols<CR>", options)
 keymap("n", "<leader>e",  ":Telescope diagnostics<CR>", options)
-keymap("n", "<leader>w",  ":Telescope session-lens<CR>", options)
+keymap("n", "<leader>w",  ":Telescope neovim-project history<CR>", options)
 keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
 keymap("n", "<leader>gg", ":LazyGit<CR>", options)
 

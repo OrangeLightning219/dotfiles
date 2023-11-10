@@ -56,7 +56,7 @@ require("lspconfig").clangd.setup({
 })
 
 require("lspconfig").pyright.setup({
-  capabilities = capabilities
+    capabilities = capabilities
 })
 
 if vim.fn.has("macunix") == 0 then
@@ -69,7 +69,7 @@ if vim.fn.has("macunix") == 0 then
 end
 
 local function lsp_symbol(name, icon)
-  vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, texthl = "Diagnostic" .. name })
+    vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, texthl = "Diagnostic" .. name })
 end
 
 lsp_symbol("Error", "")
@@ -82,43 +82,43 @@ lsp_symbol("Warn", "")
 local cmp = require("cmp")
 
 local function close_completion_window(moveUp)
-  if cmp.visible() then
-    cmp.close()
-  end
-  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-  local line_count = vim.api.nvim_buf_line_count(0)
+    if cmp.visible() then
+        cmp.close()
+    end
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local line_count = vim.api.nvim_buf_line_count(0)
 
-  if moveUp and row ~= 1 then
-    row = row - 1
-  elseif not moveUp and row ~= line_count then
-    row = row + 1
-  end
-  vim.api.nvim_win_set_cursor(0, {row, col})
+    if moveUp and row ~= 1 then
+        row = row - 1
+    elseif not moveUp and row ~= line_count then
+        row = row + 1
+    end
+    vim.api.nvim_win_set_cursor(0, {row, col})
 end
 
 snippets_filter = function(entry)
-  return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+    return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
 end 
 
 cmp.setup({
     view = { entries = {name = "custom", separator = "|" } },
     window = {
-      completion = {
-        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-        col_offset = -3,
-        side_padding = 0,
-      },
+        completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            col_offset = -3,
+            side_padding = 0,
+        },
     },
     formatting = {
-      fields = { "kind", "abbr", "menu" },
-      format = function(entry, vim_item)
-        local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-        local strings = vim.split(kind.kind, "%s", { trimempty = true })
-        kind.kind = " " .. (strings[1] or "") .. " "
-        kind.menu = "    (" .. (strings[2] or "") .. ")"
-        vim_item.dup = 0
-        return kind
-      end,
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.menu = "    (" .. (strings[2] or "") .. ")"
+            vim_item.dup = 0
+            return kind
+        end,
     },
     mapping = {
         ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -208,24 +208,24 @@ require("nvim-treesitter.configs").setup({
 -- =================================================================================
 
 require("neo-tree").setup({
-  filesystem = { filtered_items = { always_show = { ".gitignore" } } }
+    filesystem = { filtered_items = { always_show = { ".gitignore" } } }
 })
 
 -- =================================================================================
 
 local tasks = {
-  build = {
-    command = "jai ./first.jai",
-    output = "quickfix", 
-    opts = { open_on_run = "auto" },
-  },
+    build = {
+        command = "jai ./first.jai",
+        output = "quickfix", 
+        opts = { open_on_run = "auto" },
+    },
 }
 
 require("yabs"):setup({
-  languages = {
-    jai = { default_task = "build", tasks = tasks }
-  },
-  tasks = tasks,
+    languages = {
+        jai = { default_task = "build", tasks = tasks }
+    },
+    tasks = tasks,
 })
 
 -- =================================================================================
@@ -238,3 +238,10 @@ require("todo-comments").setup({
         PERF = { alt = { "PERFORMANCE", "OPTIMIZE", "MEMORY" } },
     },
 })
+require("neovim-project").setup({
+    projects = {
+        "E:/Projects/*"
+    },
+})
+-- =================================================================================
+
