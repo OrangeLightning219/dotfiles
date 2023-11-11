@@ -135,3 +135,9 @@ vim.cmd([[
         autocmd BufEnter,BufFilePost *.py :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
     augroup END
 ]])
+
+vim.filetype.add({
+    extension = {
+        jai = "jai"
+    }
+})

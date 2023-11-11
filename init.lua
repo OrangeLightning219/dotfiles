@@ -13,15 +13,13 @@ require('rose-pine').setup({
 
 	highlight_groups = {
         Macro = {fg = 'rose'},
-        ['@constant'] = {fg = 'iris'},
-        Constant = {fg = 'iris'},
+        ['@constant'] = {fg = 'iris', link = ""},
         ['@constructor'] = {fg = 'rose'},
-        ['@keyword'] = {fg = pallete.pine},
-        Keyword    = {fg = pallete.pine},
-        ['@repeat'] = {fg = pallete.pine},
-        ['@conditional'] = {fg = pallete.pine},
-        ['@operator'] = {fg = pallete.pine},
-        Operator = {fg = pallete.pine},
+        ['@keyword'] = {fg = pallete.pine, link = ""},
+        ['@repeat'] = {fg = pallete.pine, link = ""},
+        ['@conditional'] = {fg = pallete.pine, link = ""},
+        ['@exception'] = {fg = pallete.pine, link = ""},
+        ['@operator'] = {fg = pallete.pine, link = ""},
         ['@delimiter'] = {fg = 'muted'},
         ['@keyword.operator'] = {fg = pallete.pine},
         ['@boolean'] = {fg = pallete.pine},
@@ -197,7 +195,7 @@ vim.treesitter.language.register("jai", "jai")
 
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
-        "c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "html", "jai",
+        "c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "hlsl", "html", "jai",
         "java", "javascript", "json", "lua", "make", "markdown", "python", "vim", "yaml"
     },
     highlight = { enable = true, },
@@ -229,7 +227,22 @@ require("yabs"):setup({
 })
 
 -- =================================================================================
-require("telescope").setup()
+
+require('plenary.filetype').add_file('jai')
+local actions = require('telescope.actions')
+require("telescope").setup({
+    defaults = {
+        mappings = {
+            i = {
+                ['<C-j>'] = actions.cycle_history_next,
+                ['<C-k>'] = actions.cycle_history_prev
+            }
+        }
+    }
+})
+
+-- =================================================================================
+
 require("nvim_comment").setup({ comment_empty = false })
 require("gitsigns").setup()
 require("lualine").setup({ options = { theme = "material" }})
@@ -243,5 +256,5 @@ require("neovim-project").setup({
         "E:/Projects/*"
     },
 })
--- =================================================================================
 
+-- =================================================================================

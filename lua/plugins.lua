@@ -46,11 +46,9 @@ plugins = {
     "rcarriga/nvim-notify",
 
     { 'rose-pine/neovim', name = 'rose-pine' },
-    "kalvinpearce/ShaderHighlight",
 
     "pianocomposer321/yabs.nvim",
 
-    -- "rmagatti/auto-session",
     {
         "coffebar/neovim-project",
         init = function()
@@ -59,8 +57,9 @@ plugins = {
         dependencies = { { "Shatur/neovim-session-manager" } },
         lazy = false,
         priority = 100,
-      },
+    },
 }
+
 options = {}
 
 require("lazy").setup(plugins, options)
