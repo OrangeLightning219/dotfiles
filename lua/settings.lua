@@ -54,6 +54,15 @@ end
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }
 
+keymap("n", "<Up>", "", options)
+keymap("i", "<Up>", "", options)
+keymap("n", "<Down>", "", options)
+keymap("i", "<Down>", "", options)
+keymap("n", "<Right>", "", options)
+keymap("i", "<Right>", "", options)
+keymap("n", "<Left>", "", options)
+keymap("i", "<Left>", "", options)
+
 keymap("n", "<leader>r",  "@:", options)
 keymap("n", "<C-h>",      "<C-w>h", options)
 keymap("n", "<C-l>",      "<C-w>l", options)
