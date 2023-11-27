@@ -212,6 +212,7 @@ require("yabs"):setup({
 -- =================================================================================
 
 require('plenary.filetype').add_file('jai')
+require('plenary.filetype').add_file('hlsl')
 local actions = require('telescope.actions')
 require("telescope").setup({
     defaults = {

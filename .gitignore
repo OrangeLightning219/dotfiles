@@ -1,1 +1,5 @@
-lazy-lock.json
+nvim/lazy-lock.json
+configstore
+gh
+OpenRGB
+yasb/yasb.log

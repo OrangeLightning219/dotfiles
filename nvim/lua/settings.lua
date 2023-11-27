@@ -143,14 +143,15 @@ vim.cmd([[
         autocmd!
         autocmd BufEnter *.jai set errorformat=%f:%l\\,%c:\ Error:\ %m
         autocmd BufWritePost *.jai JaiFormat
-        autocmd BufWritePre *.c,*.h,*.cpp,*.hpp ClangFormat
-        autocmd BufEnter,BufFilePost *.jai,*.c,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+        autocmd BufWritePre *.c,*.cc,*.h,*.cpp,*.hpp ClangFormat
+        autocmd BufEnter,BufFilePost *.jai,*.c,*.cc,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
         autocmd BufEnter,BufFilePost *.py :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
     augroup END
 ]])
 
 vim.filetype.add({
     extension = {
-        jai = "jai"
+        jai = "jai",
+        hlsl = "hlsl"
     }
 })

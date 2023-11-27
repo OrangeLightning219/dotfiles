@@ -1,0 +1,73 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "palette": {
+        "white": "#FFFFFF",
+        "purple": "#8981d6",
+        "red": "#eb6f92",
+        "salmon": "#ea9a97"
+    },
+    "blocks": [
+      {
+        "alignment": "right",
+        "segments": [
+          {
+            "background": "p:red",
+            "foreground": "p:white",
+            "leading_diamond": " \ue0b6",
+            "properties": {
+              "fetch_version": false
+            },
+            "style": "diamond",
+            "template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
+            "trailing_diamond": "\ue0b4",
+            "type": "python"
+          }
+
+        ],
+        "type": "rprompt"
+      },
+      {
+        "alignment": "left",
+        "newline": true,
+        "segments": [
+            {
+                "background": "p:red",
+                "foreground": "p:white",
+                "leading_diamond": "\ue0b6",
+                "style": "diamond",
+                "template": "{{ .UserName }} ",
+                "type": "session"
+              },
+              {
+                "background": "p:purple",
+                "foreground": "p:white",
+                "powerline_symbol": "\ue0b0",
+                "properties": {
+                  "style": "folder"
+                },
+                "style": "powerline",
+                "template": " {{ .Path }} ",
+                "type": "path"
+              },
+              {
+                "background": "p:salmon",
+                "foreground": "p:white",
+                "powerline_symbol": "\ue0b0",
+                "properties": {
+                  "branch_icon": "",
+                  "fetch_stash_count": true,
+                  "fetch_status": false,
+                  "fetch_upstream_icon": true
+                },
+                "style": "powerline",
+                "template": " \u279c ({{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
+                "type": "git"
+              }
+        ],
+        "type": "prompt"
+      }
+    ],
+    "final_space": true,
+    "version": 2
+  }
+  
