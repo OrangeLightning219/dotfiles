@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 vim.g.nobackup = true
 vim.g.noswapfile = true
 vim.g.neovide_remember_window_size = true
+vim.g.neovide_transparency = 0.8
 vim.g.tabstob = 4
 vim.g.nowrap = true
 vim.g.nolist = true
@@ -79,8 +80,8 @@ options.silent = true
 keymap("n", "<leader>1", ":Neotree toggle<CR>", options)
 
 keymap("n", "<leader>n",  "<cmd>lua vim.lsp.buf.rename()<CR>", options)
-keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
-keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
+-- keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
+-- keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", options)
 keymap("n", "<leader>gr", ":Telescope lsp_references<CR>", options)
 keymap("n", "<leader>gd", ":Telescope lsp_definitions<CR>", options)
@@ -92,14 +93,10 @@ keymap("n", "<leader>w",  ":Telescope neovim-project history<CR>", options)
 keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
 keymap("n", "<leader>gg", ":LazyGit<CR>", options)
 
-function run_build_task()
-    vim.cmd("wa")
-    require("yabs"):run_task("build")
-end
-vim.api.nvim_create_user_command("RunBuildTask", run_build_task, {nargs = 0, desc = ""})
-
-keymap("n", "<F5>", ":RunBuildTask<CR>", options)
-keymap("i", "<F5>", "<cmd>:RunBuildTask<CR>", options)
+keymap("n", "<F5>", ":wa<CR>:Automaton tasks default<CR>", options)
+keymap("i", "<F5>", "<Cmd>:wa<CR><Cmd>:Automaton tasks default<CR>", options)
+keymap("n", "<F8>", ":wa<CR>:Automaton launch default<CR>", options)
+keymap("i", "<F8>", "<Cmd>:wa<CR><Cmd>:Automaton launch default<CR>", options)
 
 keymap("n", "<M-/>", ":CommentToggle<CR>", options)
 keymap("i", "<M-/>", "<Cmd>:CommentToggle<CR>", options)
@@ -108,11 +105,11 @@ keymap("v", "<M-/>", ":CommentToggle<CR>", options)
 keymap("n", "<C-s>", ":wa!<CR>", options)
 keymap("i", "<C-s>", "<Cmd>:wa!<CR>", options)
 
-keymap("n", "<M-.>",     ":try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
-keymap("i", "<M-.>",     "<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
-keymap("n", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
-keymap("i", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
-keymap("n", "<leader>q", ":cclose<CR>", options)
+-- keymap("n", "<M-.>",     ":try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
+-- keymap("i", "<M-.>",     "<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
+-- keymap("n", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
+-- keymap("i", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
+keymap("n", "<leader>q", ":q<CR>", options)
 
 local function jai_format()
     local job = require("plenary.job")

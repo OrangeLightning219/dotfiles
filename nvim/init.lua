@@ -194,20 +194,7 @@ require("neo-tree").setup({
 
 -- =================================================================================
 
-local tasks = {
-    build = {
-        command = "jai ./first.jai",
-        output = "quickfix", 
-        opts = { open_on_run = "auto" },
-    },
-}
-
-require("yabs"):setup({
-    languages = {
-        jai = { default_task = "build", tasks = tasks }
-    },
-    tasks = tasks,
-})
+require("automaton").setup({})
 
 -- =================================================================================
 

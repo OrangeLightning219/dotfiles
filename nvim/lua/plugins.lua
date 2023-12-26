@@ -47,7 +47,8 @@ plugins = {
 
     { 'rose-pine/neovim', name = 'rose-pine' },
 
-    "pianocomposer321/yabs.nvim",
+    -- "pianocomposer321/yabs.nvim",
+    "Dax89/automaton.nvim",
 
     {
         "coffebar/neovim-project",
