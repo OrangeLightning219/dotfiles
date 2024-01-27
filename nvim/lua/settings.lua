@@ -5,14 +5,14 @@ vim.cmd([[
 vim.g.mapleader = " "
 
 vim.g.nobackup = true
-vim.g.noswapfile = true
 vim.g.neovide_remember_window_size = true
-vim.g.neovide_transparency = 0.8
+vim.g.neovide_transparency = 0.9
 vim.g.tabstob = 4
 vim.g.nowrap = true
 vim.g.nolist = true
 vim.g.delimitMate_expand_cr = 1
 
+vim.opt.swapfile = false
 vim.opt.laststatus = 2
 vim.opt.autoread = true
 vim.opt.foldlevelstart = 99
@@ -105,11 +105,12 @@ keymap("v", "<M-/>", ":CommentToggle<CR>", options)
 keymap("n", "<C-s>", ":wa!<CR>", options)
 keymap("i", "<C-s>", "<Cmd>:wa!<CR>", options)
 
--- keymap("n", "<M-.>",     ":try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
--- keymap("i", "<M-.>",     "<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
--- keymap("n", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
--- keymap("i", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
+keymap("n", "<M-.>",     ":try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
+keymap("i", "<M-.>",     "<Cmd>:try <bar> cn <bar> catch <bar> cfirst <bar> endtry<CR>", options)
+keymap("n", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
+keymap("i", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
 keymap("n", "<leader>q", ":q<CR>", options)
+keymap("n", "<leader>cq", ":cclose<CR>", options)
 
 local function jai_format()
     local job = require("plenary.job")
@@ -135,16 +136,27 @@ end
 
 vim.api.nvim_create_user_command("EvenSplits", even_splits, {nargs = 0, desc = ""}) 
 
-vim.cmd([[
-    augroup AUTOCMD_GROUP
-        autocmd!
-        autocmd BufEnter *.jai set errorformat=%f:%l\\,%c:\ Error:\ %m
-        autocmd BufWritePost *.jai JaiFormat
-        autocmd BufWritePre *.c,*.cc,*.h,*.cpp,*.hpp ClangFormat
-        autocmd BufEnter,BufFilePost *.jai,*.c,*.cc,*.cpp,*.h,*.hpp,*.hlsl :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
-        autocmd BufEnter,BufFilePost *.py :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
-    augroup END
-]])
+vim.opt.errorformat:append("%f:%l\\,%c:\\ Error:\\ %m")
+vim.opt.errorformat:append("%f\\(%l\\,%c-%*[0-9]\\):\\ error\\ X%*[0-9]:\\ %m")
+
+commands = {
+    {events = {"User"}, patterns = {"SessionSavePre"}, command = "cclose"},
+    {events = {"BufWritePost"}, patterns = {"*.jai"}, command = "JaiFormat"},
+    {events = {"BufWritePre"}, patterns = {"*.c", "*.cc", "*.h", "*.cpp", "*.hpp"}, command = "ClangFormat"},
+    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
+    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
+    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
+}
+
+local autocommand_group = vim.api.nvim_create_augroup('auto_commands', {}) -- A global group for all your config autocommands
+
+for _, c in ipairs(commands) do
+    vim.api.nvim_create_autocmd(c.events, {
+        command = c.command,
+        group = autocommand_group,
+        pattern = c.patterns
+    })
+end
 
 vim.filetype.add({
     extension = {

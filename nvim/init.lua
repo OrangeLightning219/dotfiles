@@ -6,10 +6,15 @@ require("plugins")
 require("rose-pine.config").options.dark_variant = "moon"
 local pallete = require('rose-pine.palette')
 pallete.pine = '#8981d6'
+pallete.base = '#232136'
 
 require('rose-pine').setup({
 	dark_variant = 'moon',
-	disable_italics = true,
+	styles = {
+        bold = false,
+        italic = false,
+        transparency = false,
+    },
 
 	highlight_groups = {
         Macro = {fg = 'rose'},
