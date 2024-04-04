@@ -30,20 +30,12 @@
         "alignment": "left",
         "newline": true,
         "segments": [
-            {
-                "background": "p:red",
-                "foreground": "p:white",
-                "leading_diamond": "\ue0b6",
-                "style": "diamond",
-                "template": "{{ .UserName }} ",
-                "type": "session"
-              },
               {
                 "background": "p:purple",
                 "foreground": "p:white",
                 "powerline_symbol": "\ue0b0",
                 "properties": {
-                  "style": "folder"
+                  "style": "agnoster_full"
                 },
                 "style": "powerline",
                 "template": " {{ .Path }} ",

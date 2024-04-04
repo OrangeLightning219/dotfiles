@@ -59,6 +59,8 @@ plugins = {
         lazy = false,
         priority = 100,
     },
+    
+    "sbdchd/neoformat"
 }
 
 options = {}

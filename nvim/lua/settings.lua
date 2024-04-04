@@ -22,7 +22,7 @@ vim.opt.errorbells = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
-vim.opt.scrolloff = 4
+vim.opt.scrolloff = 10
 vim.opt.termguicolors = true
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.background = "dark"
@@ -142,7 +142,8 @@ vim.opt.errorformat:append("%f\\(%l\\,%c-%*[0-9]\\):\\ error\\ X%*[0-9]:\\ %m")
 commands = {
     {events = {"User"}, patterns = {"SessionSavePre"}, command = "cclose"},
     {events = {"BufWritePost"}, patterns = {"*.jai"}, command = "JaiFormat"},
-    {events = {"BufWritePre"}, patterns = {"*.c", "*.cc", "*.h", "*.cpp", "*.hpp"}, command = "ClangFormat"},
+    {events = {"BufWritePre"}, patterns = {"*.c", "*.cc", "*.h", "*.cpp", "*.hpp", "*.js"}, command = "ClangFormat"},
+    {events = {"BufWritePre"}, patterns = {"*.html", "*.scss"}, command = "undojoin | Neoformat"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},

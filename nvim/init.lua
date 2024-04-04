@@ -42,13 +42,13 @@ vim.cmd('colorscheme rose-pine')
 local configs = require("lspconfig.configs")
 local util = require("lspconfig.util")
 
-configs.jails = {
-    default_config = {
-        cmd = { "jails" },
-        filetypes = { "jai" },
-        root_dir = util.path.dirname,
-    },
-}
+-- configs.jails = {
+--     default_config = {
+--         cmd = { "jails" },
+--         filetypes = { "jai" },
+--         root_dir = util.path.dirname,
+--     },
+-- }
 
 -- vim.lsp.set_log_level("debug")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -63,12 +63,12 @@ require("lspconfig").pyright.setup({
 })
 
 if vim.fn.has("macunix") == 0 then
-    require("lspconfig").jails.setup({
-        capabilities = capabilities,
-        root_dir = function(fname)
-            return vim.fn.getcwd()
-        end
-    })
+    -- require("lspconfig").jails.setup({
+    --     capabilities = capabilities,
+    --     root_dir = function(fname)
+    --         return vim.fn.getcwd()
+    --     end
+    -- })
 end
 
 local function lsp_symbol(name, icon)
@@ -232,5 +232,4 @@ require("neovim-project").setup({
         "E:/Projects/*"
     },
 })
-
 -- =================================================================================
