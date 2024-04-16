@@ -147,6 +147,7 @@ commands = {
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
+    {events = {"FileType"}, patterns = {"qf"}, command = "wincmd J"},
 }
 
 local autocommand_group = vim.api.nvim_create_augroup('auto_commands', {}) -- A global group for all your config autocommands
