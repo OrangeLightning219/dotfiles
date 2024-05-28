@@ -92,7 +92,7 @@
                 "opacity": 100,
                 "padding": "8",
                 "scrollbarState": "visible",
-                "startingDirectory": "%GAMEDEV_PARTITION%:\\Projects\\metroidvania",
+                "startingDirectory": "%GAMEDEV_PATH%\\Projects\\metroidvania",
                 "useAcrylic": true
             },
             {

@@ -229,7 +229,7 @@ require("todo-comments").setup({
 })
 require("neovim-project").setup({
     projects = {
-        os.getenv("GAMEDEV_PARTITION") .. ":/Projects/*"
+        os.getenv("GAMEDEV_PATH") .. "/Projects/*"
     },
 })
 -- =================================================================================
