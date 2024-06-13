@@ -27,6 +27,7 @@ plugins = {
     "onsails/lspkind.nvim",
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
+    "hrsh7th/vim-vsnip-integ",
 
     "nvim-tree/nvim-web-devicons",
     { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = { "MunifTanjim/nui.nvim" } },
@@ -60,7 +61,8 @@ plugins = {
         priority = 100,
     },
     
-    "sbdchd/neoformat"
+    -- "sbdchd/neoformat"
+    "stevearc/conform.nvim"
 }
 
 options = {}

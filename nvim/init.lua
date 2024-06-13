@@ -53,14 +53,14 @@ local util = require("lspconfig.util")
 -- vim.lsp.set_log_level("debug")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require("lspconfig").clangd.setup({
-    cmd = {"clangd", "--header-insertion=never"},
-    capabilities = capabilities
-})
+-- require("lspconfig").clangd.setup({
+--     cmd = {"clangd", "--header-insertion=never"},
+--     capabilities = capabilities
+-- })
 
-require("lspconfig").pyright.setup({
-    capabilities = capabilities
-})
+-- require("lspconfig").pyright.setup({
+--     capabilities = capabilities
+-- })
 
 if vim.fn.has("macunix") == 0 then
     -- require("lspconfig").jails.setup({
@@ -70,6 +70,9 @@ if vim.fn.has("macunix") == 0 then
     --     end
     -- })
 end
+
+require("lspconfig").gopls.setup({})
+require("lspconfig").htmx.setup({})
 
 local function lsp_symbol(name, icon)
     vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, texthl = "Diagnostic" .. name })
@@ -218,6 +221,8 @@ require("telescope").setup({
 })
 
 -- =================================================================================
+require("conform").setup({ formatters_by_ft = { html = { "djlint" } } })
+require("conform").formatters.djlint = { prepend_args = { "--profile=golang", "--max-blank-lines=1", "--format-js", "--indent-js=4" } }
 
 require("nvim_comment").setup({ comment_empty = false })
 require("gitsigns").setup()
