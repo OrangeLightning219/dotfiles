@@ -139,33 +139,15 @@ vim.api.nvim_create_user_command("EvenSplits", even_splits, {nargs = 0, desc = "
 vim.opt.errorformat:append("%f:%l\\,%c:\\ Error:\\ %m")
 vim.opt.errorformat:append("%f\\(%l\\,%c-%*[0-9]\\):\\ error\\ X%*[0-9]:\\ %m")
 
-
-local function format_go(ev)
-    local params = vim.lsp.util.make_range_params()
-    params.context = {only = {"source.organizeImports"}}
-    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
-    for cid, res in pairs(result or {}) do
-        for _, r in pairs(res.result or {}) do
-            if r.edit then
-                local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-                vim.lsp.util.apply_workspace_edit(r.edit, enc)
-            end
-        end
-    end
-    vim.lsp.buf.format({async = false})
-end
-
-local function format_html(args)
+local function format(args)
     require("conform").format({ bufnr = args.buf })
 end
 
 commands = {
     {events = {"User"}, patterns = {"SessionSavePre"}, command = "cclose"},
     {events = {"BufWritePost"}, patterns = {"*.jai"}, command = "JaiFormat"},
-    {events = {"BufWritePre"}, patterns = {"*.c", "*.cc", "*.h", "*.cpp", "*.hpp", "*.js"}, command = "ClangFormat"},
-    {events = {"BufWritePre"}, patterns = {"*.html", "*.scss"}, callback = format_html},
-    {events = {"BufWritePre"}, patterns = {"*.go"}, callback = format_go},
-    {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.go"}, command = "setlocal noet ts=4 sw=4 sts=4"},
+    {events = {"BufWritePre"}, patterns = {"*"}, callback = format},
+    {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.go", "*.templ"}, command = "setlocal noet ts=4 sw=4 sts=4"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},

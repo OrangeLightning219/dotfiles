@@ -221,7 +221,18 @@ require("telescope").setup({
 })
 
 -- =================================================================================
-require("conform").setup({ formatters_by_ft = { html = { "djlint" } } })
+require("conform").setup({ 
+    formatters_by_ft = { 
+        html  = { "djlint" }, 
+        go    = { "goimports", "gofmt" },
+        templ = { "templ" },
+        c     = { "clang-format" },
+        cpp   = { "clang-format" },
+        h     = { "clang-format" },
+        hpp   = { "clang-format" },
+        cc    = { "clang-format" }, 
+    } 
+})
 require("conform").formatters.djlint = { prepend_args = { "--profile=golang", "--max-blank-lines=1", "--format-js", "--indent-js=4" } }
 
 require("nvim_comment").setup({ comment_empty = false })
