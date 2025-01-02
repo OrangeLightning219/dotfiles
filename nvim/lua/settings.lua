@@ -148,7 +148,7 @@ commands = {
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.templ"}, command = "setlocal nowrap"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
-    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
+    -- {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
     {events = {"FileType"}, patterns = {"qf"}, command = "wincmd J"},
 }
 
@@ -173,6 +173,10 @@ end
 vim.filetype.add({
     extension = {
         jai = "jai",
-        hlsl = "hlsl"
+        hlsl = "hlsl",
+        shader = "hlsl",
+        pixel = "hlsl",
+        vertex = "hlsl",
+        compute = "hlsl"
     }
 })

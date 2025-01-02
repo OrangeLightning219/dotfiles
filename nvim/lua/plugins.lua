@@ -16,7 +16,7 @@ plugins = {
     "nathom/filetype.nvim",
 
     "nvim-treesitter/nvim-treesitter",
-    -- "nvim-treesitter/playground",
+    "nvim-treesitter/playground",
 
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
