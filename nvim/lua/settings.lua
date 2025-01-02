@@ -6,12 +6,11 @@ vim.g.mapleader = " "
 
 vim.g.nobackup = true
 vim.g.neovide_remember_window_size = true
-vim.g.neovide_transparency = 0.9
-vim.g.tabstob = 4
-vim.g.nowrap = true
-vim.g.nolist = true
+vim.g.neovide_transparency = 1
+vim.g.neovide_normal_opacity = 1
 vim.g.delimitMate_expand_cr = 1
 
+vim.opt.wrap = true
 vim.opt.swapfile = false
 vim.opt.laststatus = 2
 vim.opt.autoread = true
@@ -31,6 +30,7 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+vim.opt.tabstop = 4
 vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.smartindent = true
@@ -41,16 +41,13 @@ vim.opt.linebreak = true
 vim.opt.number = true
 vim.opt.signcolumn = "yes"
 vim.opt.pumheight = 10
+vim.opt.concealcursor = ""
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,resize"
 
-if vim.fn.has("macunix") ~= 0 then
-    vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h12" }
-else
 vim.opt.guifont = { "FiraCode Nerd Font", ":h14" }
 -- vim.opt.guifont = { "CaskaydiaCove NF", ":h12" }
 -- vim.opt.guifont = { "JetBrainsMono NF", ":h12" }
-end
 
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }
@@ -80,8 +77,8 @@ options.silent = true
 keymap("n", "<leader>1", ":Neotree toggle<CR>", options)
 
 keymap("n", "<leader>n",  "<cmd>lua vim.lsp.buf.rename()<CR>", options)
--- keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
--- keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
+keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
+keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", options)
 keymap("n", "<leader>gr", ":Telescope lsp_references<CR>", options)
 keymap("n", "<leader>gd", ":Telescope lsp_definitions<CR>", options)
@@ -148,13 +145,14 @@ commands = {
     {events = {"BufWritePost"}, patterns = {"*.jai"}, command = "JaiFormat"},
     {events = {"BufWritePre"}, patterns = {"*"}, callback = format},
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.go", "*.templ"}, command = "setlocal noet ts=4 sw=4 sts=4"},
+    {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.templ"}, command = "setlocal nowrap"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
     {events = {"FileType"}, patterns = {"qf"}, command = "wincmd J"},
 }
 
-local autocommand_group = vim.api.nvim_create_augroup('auto_commands', {}) -- A global group for all your config autocommands
+local autocommand_group = vim.api.nvim_create_augroup('auto_commands', {})
 
 for _, c in ipairs(commands) do
     if c.callback == nil then

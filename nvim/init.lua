@@ -30,6 +30,9 @@ require('rose-pine').setup({
         ['@boolean'] = {fg = pallete.pine},
         ['@include'] = {fg = pallete.pine},
         ['@string.escape'] = {fg = pallete.pine},
+        ['@variable.member'] = {fg = 'text'},
+        ['@module'] = {fg = pallete.foam},
+        ['@function.method.call'] = {fg = pallete.rose},
         TelescopeMatching = {fg = 'gold'},
         TelescopeNormal = {fg = 'text'}
 	}
@@ -42,13 +45,13 @@ vim.cmd('colorscheme rose-pine')
 local configs = require("lspconfig.configs")
 local util = require("lspconfig.util")
 
--- configs.jails = {
---     default_config = {
---         cmd = { "jails" },
---         filetypes = { "jai" },
---         root_dir = util.path.dirname,
---     },
--- }
+configs.jails = {
+    default_config = {
+        cmd = { "jails" },
+        filetypes = { "jai" },
+        root_dir = util.path.dirname,
+    },
+}
 
 -- vim.lsp.set_log_level("debug")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -62,26 +65,21 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --     capabilities = capabilities
 -- })
 
-if vim.fn.has("macunix") == 0 then
-    -- require("lspconfig").jails.setup({
-    --     capabilities = capabilities,
-    --     root_dir = function(fname)
-    --         return vim.fn.getcwd()
-    --     end
-    -- })
-end
+-- require("lspconfig").gopls.setup({})
+-- require("lspconfig").htmx.setup({})
+-- require("lspconfig").tailwindcss.setup({})
+require("lspconfig").csharp_ls.setup({})
 
-require("lspconfig").gopls.setup({})
-require("lspconfig").htmx.setup({})
-
-local function lsp_symbol(name, icon)
-    vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, texthl = "Diagnostic" .. name })
-end
-
-lsp_symbol("Error", "")
-lsp_symbol("Hint", "")
-lsp_symbol("Info", "")
-lsp_symbol("Warn", "")
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+        }
+    }
+})
 
 -- =================================================================================
 
@@ -186,8 +184,8 @@ vim.treesitter.language.register("jai", "jai")
 
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
-        "c", "cpp", "bash", "cmake", "cuda", "dockerfile", "glsl", "hlsl", "html", "jai",
-        "java", "javascript", "json", "lua", "make", "markdown", "python", "vim", "yaml"
+        "c", "cpp", "c_sharp", "bash", "cmake", "css", "cuda", "dockerfile", "glsl", "hlsl", "html", "jai",
+        "java", "javascript", "json", "lua", "make", "markdown", "python", "templ", "tsx", "vim", "yaml"
     },
     highlight = { enable = true, },
     indent = { enable = true },
@@ -231,9 +229,11 @@ require("conform").setup({
         h     = { "clang-format" },
         hpp   = { "clang-format" },
         cc    = { "clang-format" }, 
+        cs    = { "csharpier" }, 
     } 
 })
-require("conform").formatters.djlint = { prepend_args = { "--profile=golang", "--max-blank-lines=1", "--format-js", "--indent-js=4" } }
+-- require("conform").formatters.djlint = { prepend_args = { "--profile=golang", "--max-blank-lines=1", "--format-js", "--indent-js=4" } }
+-- require("tailwind-tools").setup({ custom_filetypes = { "templ" }, conceal = { enabled = true } })
 
 require("nvim_comment").setup({ comment_empty = false })
 require("gitsigns").setup()
@@ -245,7 +245,8 @@ require("todo-comments").setup({
 })
 require("neovim-project").setup({
     projects = {
-        os.getenv("GAMEDEV_PATH") .. "/Projects/*"
+        os.getenv("GAMEDEV_PATH") .. "/Projects/*",
+        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Unity Projects/*"
     },
 })
 -- =================================================================================

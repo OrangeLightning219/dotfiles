@@ -48,7 +48,6 @@ plugins = {
 
     { 'rose-pine/neovim', name = 'rose-pine' },
 
-    -- "pianocomposer321/yabs.nvim",
     "OrangeLightning219/automaton.nvim",
 
     {
@@ -61,8 +60,8 @@ plugins = {
         priority = 100,
     },
     
-    -- "sbdchd/neoformat"
-    "stevearc/conform.nvim"
+    "stevearc/conform.nvim",
+    -- "luckasRanarison/tailwind-tools.nvim",
 }
 
 options = {}
