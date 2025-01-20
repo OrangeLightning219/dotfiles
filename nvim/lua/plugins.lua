@@ -12,13 +12,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 plugins = {
-    "dstein64/vim-startuptime",
-    "nathom/filetype.nvim",
+    -- "dstein64/vim-startuptime",
+    -- "nathom/filetype.nvim",
 
     "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/playground",
 
     "neovim/nvim-lspconfig",
+    "nvimdev/lspsaga.nvim",
+    
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
@@ -44,7 +47,7 @@ plugins = {
     "Raimondi/delimitMate",
     "rhysd/vim-clang-format",
 
-    "rcarriga/nvim-notify",
+    -- "rcarriga/nvim-notify",
 
     { 'rose-pine/neovim', name = 'rose-pine' },
 
@@ -61,6 +64,7 @@ plugins = {
     },
     
     "stevearc/conform.nvim",
+    "unblevable/quick-scope"
     -- "luckasRanarison/tailwind-tools.nvim",
 }
 

@@ -18,27 +18,35 @@ require('rose-pine').setup({
 
 	highlight_groups = {
         Macro = {fg = 'rose'},
-        ['@constant'] = {fg = 'iris', link = ""},
-        ['@constructor'] = {fg = 'rose'},
+        ['@constant'] = {fg = pallete.iris, link = ""},
+        ['@constructor'] = {fg = pallete.rose},
         ['@keyword'] = {fg = pallete.pine, link = ""},
+        ['@field'] = {fg = pallete.leaf, link = ""},
         ['@repeat'] = {fg = pallete.pine, link = ""},
         ['@conditional'] = {fg = pallete.pine, link = ""},
         ['@exception'] = {fg = pallete.pine, link = ""},
         ['@operator'] = {fg = pallete.pine, link = ""},
-        ['@delimiter'] = {fg = 'muted'},
+        ['@delimiter'] = {fg = pallete.muted},
         ['@keyword.operator'] = {fg = pallete.pine},
         ['@keyword.directive'] = {fg = pallete.pine},
         ['@keyword.directive.define'] = {fg = pallete.pine},
         ['@keyword.import'] = {fg = pallete.pine},
+        ['@keyword.return'] = {fg = pallete.pine},
         ['@boolean'] = {fg = pallete.pine},
         ['@include'] = {fg = pallete.pine},
         ['@string.escape'] = {fg = pallete.pine},
-        ['@variable.member'] = {fg = 'text'},
-        ['@property'] = {fg = 'text'},
+        ['@variable.member'] = {fg = pallete.text},
+        ['@property'] = {fg = pallete.text},
         ['@module'] = {fg = pallete.foam},
         ['@function.method.call'] = {fg = pallete.rose},
-        TelescopeMatching = {fg = 'gold'},
-        TelescopeNormal = {fg = 'text'}
+        TelescopeMatching = {fg = pallete.gold},
+        TelescopeNormal = {fg = pallete.text},
+        StatusLineNC = {blend = 0},
+        TreesitterContext = {bg = pallete.base},
+        TreesitterContextLineNumber = {fg = pallete.muted, bg = pallete.base},
+        -- TreesitterContextSeparator = {fg = pallete.muted, bg = pallete.base},
+        TreesitterContextBottom = {underline = true, sp = pallete.muted},
+        TreesitterContextLineNumberBottom = {underline = true, sp = pallete.muted},
 	}
 })
 
@@ -58,7 +66,7 @@ configs.jails = {
 }
 
 -- vim.lsp.set_log_level("debug")
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- require("lspconfig").clangd.setup({
 --     cmd = {"clangd", "--header-insertion=never"},
@@ -72,7 +80,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- require("lspconfig").gopls.setup({})
 -- require("lspconfig").htmx.setup({})
 -- require("lspconfig").tailwindcss.setup({})
-require("lspconfig").csharp_ls.setup({})
+-- require("lspconfig").csharp_ls.setup({})
 
 vim.diagnostic.config({
     signs = {
@@ -82,6 +90,24 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.INFO] = "",
             [vim.diagnostic.severity.HINT] = "",
         }
+    }
+})
+
+require("lspsaga").setup({
+    symbol_in_winbar = {
+        enable = false,
+    },
+    beacon = {
+        enable = false,
+    },
+    lightbulb = {
+        enable = false,
+    },
+    code_action = {
+        keys = {
+            quit = { "q", "<ESC>" },
+            exec = "<CR>",
+        },
     }
 })
 
@@ -120,7 +146,7 @@ cmp.setup({
     }, 
     sources = cmp.config.sources({
         { name = "nvim_lsp", entry_filter = snippets_filter }, 
-        -- { name = 'nvim_lsp_signature_help' },
+        { name = 'nvim_lsp_signature_help' },
         { name = "buffer" }
     }),
     experimental = {
@@ -178,8 +204,9 @@ local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.jai = {
     install_info = {
-        url = "https://github.com/adragomir/tree-sitter-jai", 
-        files = {"src/parser.c", "src/scanner.cc"},
+        url = "https://github.com/constantitus/tree-sitter-jai", 
+        -- url = "https://github.com/adragomir/tree-sitter-jai", 
+        files = {"src/parser.c", "src/scanner.c"},
     },
     filetype = "jai", 
 }
@@ -196,10 +223,16 @@ require("nvim-treesitter.configs").setup({
     playground = { enable = false, }
 })
 
+require("treesitter-context").setup({
+    line_numbers = true,
+    mode = "topline",  -- Line used to calculate context. Choices: 'cursor', 'topline'
+    -- separator = "-",
+})
+
 -- =================================================================================
 
 require("neo-tree").setup({
-    filesystem = { filtered_items = { always_show = { ".gitignore" } } }
+    filesystem = { filtered_items = { always_show = { ".gitignore", ".ark_ignore", ".ignore" } } }
 })
 
 -- =================================================================================
@@ -250,7 +283,8 @@ require("todo-comments").setup({
 require("neovim-project").setup({
     projects = {
         os.getenv("GAMEDEV_PATH") .. "/Projects/*",
-        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Unity Projects/*"
+        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Unity Projects/*",
+        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Jai Projects/*",
     },
 })
 -- =================================================================================

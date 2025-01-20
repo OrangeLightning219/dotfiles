@@ -79,13 +79,14 @@ keymap("n", "<leader>1", ":Neotree toggle<CR>", options)
 keymap("n", "<leader>n",  "<cmd>lua vim.lsp.buf.rename()<CR>", options)
 keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
 keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
-keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", options)
+keymap("n", "<leader>ca", ":Lspsaga code_action<CR>", options)
 keymap("n", "<leader>gr", ":Telescope lsp_references<CR>", options)
 keymap("n", "<leader>gd", ":Telescope lsp_definitions<CR>", options)
 keymap("n", "<leader>f",  "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
 keymap("n", "<leader>t",  ":Telescope live_grep<CR>", options)
-keymap("n", "<leader>d",  ":Telescope lsp_dynamic_workspace_symbols<CR>", options)
-keymap("n", "<leader>e",  ":Telescope diagnostics<CR>", options)
+keymap("n", "<leader>d",  ":Telescope diagnostics<CR>", options)
+-- keymap("n", "<leader>e",  "<cmd>lua vim.diagnostic.open_float()<CR>", options)
+keymap("n", "<leader>e",  ":Lspsaga diagnostic_jump_next<CR>", options)
 keymap("n", "<leader>w",  ":Telescope neovim-project history<CR>", options)
 keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
 keymap("n", "<leader>gg", ":LazyGit<CR>", options)
@@ -134,10 +135,15 @@ end
 vim.api.nvim_create_user_command("EvenSplits", even_splits, {nargs = 0, desc = ""}) 
 
 vim.opt.errorformat:append("%f:%l\\,%c:\\ Error:\\ %m")
+vim.opt.errorformat:append("%f:%l\\,%c:\\ Warning:\\ %m")
 vim.opt.errorformat:append("%f\\(%l\\,%c-%*[0-9]\\):\\ error\\ X%*[0-9]:\\ %m")
 
 local function format(args)
     require("conform").format({ bufnr = args.buf })
+end
+
+local function highlight_yank(args)
+    vim.highlight.on_yank({timeout = 350})
 end
 
 commands = {
@@ -150,6 +156,7 @@ commands = {
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
     -- {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
     {events = {"FileType"}, patterns = {"qf"}, command = "wincmd J"},
+    {events = {"TextYankPost"}, patterns = {"*"}, callback = highlight_yank},
 }
 
 local autocommand_group = vim.api.nvim_create_augroup('auto_commands', {})

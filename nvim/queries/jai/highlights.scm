@@ -1,160 +1,231 @@
-; highlights.scm
+; Includes
 
-(alias_if) @keyword
-(alias_then) @keyword
-(alias_case) @keyword
-(alias_return) @keyword
-(alias_defer) @keyword
-(alias_else) @keyword
-(alias_through) @keyword
-(alias_return) @keyword
-(alias_for) @keyword
-(alias_while) @keyword
-(alias_using) @keyword
-(alias_struct) @keyword
-(alias_continue) @keyword
-(alias_break) @keyword
-(alias_struct) @keyword
-(alias_enum) @keyword
-(alias_enum_flags) @keyword
-(alias_static_if) @keyword
-(alias_union) @keyword
-(alias_remove) @keyword
-(alias_assert) @keyword
-(alias_ifx) @keyword
+[
+  "#import"
+  "#load"
+] @include
 
-(alias_import) @keyword
-(alias_dir) @keyword
-(alias_string) @keyword
-(alias_file) @keyword
-(alias_load) @keyword
 
-(alias_add_op) @operator
-(alias_arith_add_op) @operator
-(alias_arith_div_op) @operator
-(alias_arith_mod_op) @operator
-(alias_arith_mul_op) @operator
-(alias_arith_sub_op) @operator
-(alias_assign_add_op) @operator
-(alias_assign_and_op) @operator
-(alias_assign_div_op) @operator
-(alias_assign_mod_op) @operator
-(alias_assign_mul_op) @operator
-(alias_assign_not_op) @operator
-(alias_assign_op) @operator
-(alias_assign_or_op) @operator
-(alias_assign_sub_op) @operator
-(alias_assign_xor_op) @operator
-(alias_bitwise_and_op) @operator
-(alias_bitwise_lsh_arith_op) @operator
-(alias_bitwise_lsh_op) @operator
-(alias_bitwise_or_op) @operator
-(alias_bitwise_rsh_arith_op) @operator
-(alias_bitwise_rsh_op) @operator
-(alias_bitwise_xor_op) @operator
-(alias_boolean_and_op) @operator
-(alias_boolean_eq_op) @operator
-(alias_boolean_ge_op) @operator
-(alias_boolean_gt_op) @operator
-(alias_boolean_le_op) @operator
-(alias_boolean_lt_op) @operator
-(alias_boolean_neq_op) @operator
-(alias_boolean_or_op) @operator
-(op_autocast) @operator
-(op_deref) @operator
-(op_ref) @operator
-(op_minus) @operator
+; Keywords
+[
+  "inline"
+  "no_inline"
+  "struct"
+  "union"
+  "using"
+  "enum"
+  "enum_flags"
+  "if"
+  "then"
+  "ifx"
+  "else"
+  "case"
+  "for"
+  "while"
+  "break"
+  "continue"
+  "remove"
+  "defer"
+  "cast"
+  "xx"
+] @keyword
 
-(alias_type_info_procedures_are_void_pointers) @keyword
-(alias_type_info_none) @keyword
-(alias_type_info_no_size_complaint) @keyword
+[
+  "return"
+] @keyword.return
 
-(alias_align) @keyword
-(alias_dump) @keyword
+[
+  "if"
+  "else"
+  "case"
+  "break"
+] @conditional
 
-(alias_type) @keyword
+((if_expression
+  [
+    "then"
+    "ifx"
+    "else"
+  ] @conditional.ternary)
+  (#set! "priority" 105))
 
-(alias_no_padding_struct_mod) @keyword
-(alias_must) @keyword
+; Repeats
 
-(string_literal) @string
-(boolean_literal) @constant
-(here_string_literal) @string
-(number_literal) @number
-(float_literal) @number
-(scientific_notation_literal) @number
-(built_in_type) @type.builtin
+[
+  "for"
+  "while"
+  "continue"
+] @repeat
 
-(comment) @comment
+; Variables
 
-(alias_caller_location_literal) @keyword
-(alias_location_literal) @keyword
-(alias_file_literal) @keyword
-(alias_line_literal) @keyword
-(alias_filepath_literal) @keyword
+; (identifier) @variable
+name: (identifier) @variable
+argument: (identifier) @variable
+named_argument: (identifier) @variable
+(member_expression (identifier) @variable)
+(parenthesized_expression (identifier) @variable)
 
-(alias_down_for_mod) @operator
-(alias_variant_array) @operator
+((identifier) @variable.builtin
+  (#any-of? @variable.builtin "context"))
 
-(alias_cast) @keyword
-(alias_c_call) @keyword
-(alias_compiler) @keyword
-(alias_complete) @keyword
-(alias_dump) @keyword
-(alias_expand) @keyword
-(alias_inline) @keyword
-(alias_inline) @keyword
-(alias_intrinsic) @keyword
-(alias_no_abc) @keyword
-(alias_no_alias) @keyword
-(alias_no_check_cast_mod) @keyword
-(alias_no_context) @keyword
-(alias_no_padding_struct_mod) @keyword
-(alias_op_splat) @keyword
-(alias_runtime_support) @keyword
-(alias_splat) @keyword
-(alias_string) @keyword
-(alias_symmetric) @keyword
-(alias_trunc_cast_mod) @keyword
-(alias_type) @keyword
-(alias_type_info_procedures_are_void_pointers) @keyword
-(alias_type_isa) @keyword
-(alias_type_ptr) @keyword
-(alias_splat) @keyword
-(alias_using) @keyword
-"." @punctuation.bracket
-"," @punctuation.bracket
-";" @punctuation.bracket
-":" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
-":=" @operator
-"::" @operator
-"=>" @operator
-"==" @operator
+; Namespaces
 
-(single_function_decl_shape name:(identifier) @function)
-(single_struct_decl_shape name:(identifier) @type)
-(single_enum_decl_shape name:(identifier) @type)
-(single_union_decl_shape name:(identifier) @type)
-(single_constant_decl_shape name:(identifier) @constant)
-(multi_variable_decl_shape name:(identifier) @variable)
-(single_variable_decl_shape name:(identifier) @variable type:(_) @type)
-(single_variable_decl_shape name:(identifier) @variable value:(_))
-(cast_expression type:(_) @type)
-(named_function_parameter name:(identifier) @variable type:(_) @type)
-(named_function_parameter name:(identifier) @variable initial:(_))
-(return_parameter type:(_) @type)
-(for_statement iterator:(identifier) @variable)
-(call_expression function:(identifier) @function)
-(import_statement import_as:(identifier) @variable)
-(assignment_statement lhs:(identifier) @variable)
-(return_statement argument:(argument_shape (identifier) @variable))
-(for_statement expr:(identifier) @variable)
+(import (identifier) @namespace)
 
-(_type_expression) @type
-(enum_identifier) @constant
+; Parameters
+
+(parameter (identifier) @parameter ":" "="? (identifier)? @constant)
+
+; (call_expression argument: (identifier) @parameter "=")
+
+; Functions
+
+; (procedure_declaration (identifier) @function (procedure (block)))
+(procedure_declaration (identifier) @function (block))
+
+(call_expression function: (identifier) @function.call)
+
+; Types
+
+type: (types) @type
+type: (identifier) @type
+((types) @type)
+
+modifier: (identifier) @keyword
+keyword: (identifier) @keyword
+
+((types (identifier) @type.builtin)
+  (#any-of? @type.builtin
+    "bool" "int" "string"
+    "s8" "s16" "s32" "s64"
+    "u8" "u16" "u32" "u64"
+    "Type" "Any"))
+
+(struct_declaration (identifier) @type ":" ":")
+
+(enum_declaration (identifier) @type ":" ":")
+
+; (const_declaration (identifier) @type ":" ":" [(array_type) (pointer_type)])
+
+; ; I don't like this
+; ((identifier) @type
+;   (#lua-match? @type "^[A-Z][a-zA-Z0-9]*$")
+;   (#not-has-parent? @type parameter procedure_declaration call_expression))
+
+; Fields
+
+(member_expression "." (identifier) @field)
+
+(assignment_statement (identifier) @field "="?)
+(update_statement (identifier) @field)
+
+; Constants
+
+((identifier) @constant
+  (#lua-match? @constant "^_*[A-Z][A-Z0-9_]*$")
+  (#not-has-parent? @constant type parameter))
+
+(member_expression . "." (identifier) @constant)
+
+(enum_declaration "{" (identifier) @constant)
+
+; Literals
+
+(integer) @number
+(float) @number
+
+(string) @string
+
+;(character) @character
+
+(string (escape_sequence) @string.escape)
+
+(boolean) @boolean
+
+[
+  (uninitialized)
+  (null)
+] @constant.builtin
+
+; Operators
+
+[
+  ":"
+  "="
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  ">"
+  ">="
+  "<"
+  "<="
+  "=="
+  "!="
+  "|"
+  "~"
+  "&"
+  "&~"
+  "<<"
+  ">>"
+  "<<<"
+  ">>>"
+  "||"
+  "&&"
+  "!"
+  ".."
+  "+="
+  "-="
+  "*="
+  "/="
+  "%="
+  "&="
+  "|="
+  "^="
+  "<<="
+  ">>="
+  "<<<="
+  ">>>="
+  "||="
+  "&&="
+] @operator
+
+; Punctuation
+
+[ "{" "}" ] @punctuation.bracket
+
+[ "(" ")" ] @punctuation.bracket
+
+[ "[" "]" ] @punctuation.bracket
+
+[
+  "`"
+  "->"
+  "."
+  ","
+  ":"
+  ";"
+] @punctuation.delimiter
+
+; Comments
+
+[
+  (block_comment)
+  (comment)
+] @comment @spell
+
+; Errors
+
+(ERROR) @error
+
+(block_comment) @comment
+
+directive: ("#") @keyword ; #if
+type: ("type_of") @type
+
+(compiler_directive) @keyword
+(heredoc_start) @none
+(heredoc_end) @none
+(heredoc_body) @string
