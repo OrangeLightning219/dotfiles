@@ -51,7 +51,8 @@ plugins = {
 
     { 'rose-pine/neovim', name = 'rose-pine' },
 
-    "OrangeLightning219/automaton.nvim",
+    -- "OrangeLightning219/automaton.nvim",
+    "Dax89/automaton.nvim",
 
     {
         "coffebar/neovim-project",

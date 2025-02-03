@@ -1,8 +1,8 @@
 ; Includes
 
 [
-  "#import"
-  "#load"
+  (import)
+  (load)
 ] @include
 
 
@@ -28,6 +28,7 @@
   "defer"
   "cast"
   "xx"
+  "push_context"
 ] @keyword
 
 [

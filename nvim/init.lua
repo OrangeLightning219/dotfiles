@@ -64,6 +64,7 @@ configs.jails = {
         root_dir = util.path.dirname,
     },
 }
+-- require("lspconfig").jails.setup({})
 
 -- vim.lsp.set_log_level("debug")
 -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -243,6 +244,7 @@ require("automaton").setup({})
 
 require('plenary.filetype').add_file('jai')
 require('plenary.filetype').add_file('hlsl')
+require('plenary.filetype').add_file('shader')
 local actions = require('telescope.actions')
 require("telescope").setup({
     defaults = {
@@ -278,6 +280,7 @@ require("lualine").setup({ options = { theme = "material" }})
 require("todo-comments").setup({
     keywords = {
         PERF = { alt = { "PERFORMANCE", "OPTIMIZE", "MEMORY" } },
+        CLEANUP = { icon = "󰃢 ", color = pallete.rose },
     },
 })
 require("neovim-project").setup({
