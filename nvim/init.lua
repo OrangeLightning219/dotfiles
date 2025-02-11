@@ -286,8 +286,7 @@ require("todo-comments").setup({
 require("neovim-project").setup({
     projects = {
         os.getenv("GAMEDEV_PATH") .. "/Projects/*",
-        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Unity Projects/*",
-        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Jai Projects/*",
+        os.getenv("SECONDARY_GAMEDEV_PATH") .. "/Jai_Projects/*",
     },
 })
 -- =================================================================================

@@ -89,7 +89,7 @@ keymap("n", "<leader>d",  ":Telescope diagnostics<CR>", options)
 keymap("n", "<leader>e",  ":Lspsaga diagnostic_jump_next<CR>", options)
 keymap("n", "<leader>w",  ":Telescope neovim-project history<CR>", options)
 keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
-keymap("n", "<leader>gg", ":LazyGit<CR>", options)
+keymap("n", "<leader>gg", ":LazyGitCurrentFile<CR>", options)
 
 keymap("n", "<F5>", ":wa<CR>:Automaton tasks default<CR>", options)
 keymap("i", "<F5>", "<Cmd>:wa<CR><Cmd>:Automaton tasks default<CR>", options)
@@ -153,7 +153,7 @@ commands = {
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.go", "*.templ"}, command = "setlocal noet ts=4 sw=4 sts=4"},
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.templ"}, command = "setlocal nowrap"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
-    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py"}, command = "set commentstring=#\\ %s"},
+    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py", "*.keymap"}, command = "set commentstring=#\\ %s"},
     -- {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
     {events = {"FileType"}, patterns = {"qf"}, command = "wincmd J"},
     {events = {"TextYankPost"}, patterns = {"*"}, callback = highlight_yank},

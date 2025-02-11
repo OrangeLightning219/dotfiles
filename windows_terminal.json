@@ -92,7 +92,7 @@
                 "opacity": 100,
                 "padding": "8",
                 "scrollbarState": "visible",
-                "startingDirectory": "%GAMEDEV_PATH%\\Projects\\metroidvania",
+                "startingDirectory": "%SECONDARY_GAMEDEV_PATH%\\Jai_Projects\\roguelike",
                 "useAcrylic": true
             },
             {
