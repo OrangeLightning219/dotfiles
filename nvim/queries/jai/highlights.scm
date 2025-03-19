@@ -63,7 +63,7 @@
 ; (identifier) @variable
 name: (identifier) @variable
 argument: (identifier) @variable
-named_argument: (identifier) @variable
+named_argument: (identifier) @comment
 (member_expression (identifier) @variable)
 (parenthesized_expression (identifier) @variable)
 

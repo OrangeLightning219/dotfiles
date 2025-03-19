@@ -77,7 +77,6 @@ options.silent = true
 keymap("n", "<leader>1", ":Neotree toggle<CR>", options)
 
 keymap("n", "<leader>n",  "<cmd>lua vim.lsp.buf.rename()<CR>", options)
-keymap("n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
 keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
 keymap("n", "<leader>ca", ":Lspsaga code_action<CR>", options)
 keymap("n", "<leader>gr", ":Telescope lsp_references<CR>", options)
@@ -109,13 +108,14 @@ keymap("n", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>
 keymap("i", "<M-,>",     ":try <bar> cp <bar> catch <bar> clast <bar> endtry<CR>", options)
 keymap("n", "<leader>q", ":q<CR>", options)
 keymap("n", "<leader>cq", ":cclose<CR>", options)
+keymap("n", "<leader>jf", ":JaiFormat<CR>", options)
 
 local function jai_format()
     local job = require("plenary.job")
     local current_file = vim.fn.expand("%:p")
     job:new({
         command = "jai-format",
-        args = { current_file },
+        args = { "-to_file", current_file },
         cwd = vim.fn.getcwd(),
         on_exit = function(j, return_val)
             local callback = vim.schedule_wrap(function(file) 

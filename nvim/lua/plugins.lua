@@ -65,7 +65,7 @@ plugins = {
     },
     
     "stevearc/conform.nvim",
-    "unblevable/quick-scope"
+    "unblevable/quick-scope",
     -- "luckasRanarison/tailwind-tools.nvim",
 }
 
