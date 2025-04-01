@@ -233,7 +233,7 @@ require("treesitter-context").setup({
 -- =================================================================================
 
 require("neo-tree").setup({
-    filesystem = { filtered_items = { always_show = { ".gitignore", ".ark_ignore", ".ignore" } } }
+    filesystem = { filtered_items = { always_show = { ".gitignore", ".ark_ignore", ".ignore", "wiki" } } }
 })
 
 -- =================================================================================
@@ -273,6 +273,11 @@ require("conform").setup({
 })
 -- require("conform").formatters.djlint = { prepend_args = { "--profile=golang", "--max-blank-lines=1", "--format-js", "--indent-js=4" } }
 -- require("tailwind-tools").setup({ custom_filetypes = { "templ" }, conceal = { enabled = true } })
+
+require("toggleterm").setup({
+    open_mapping = [[<c-\>]],
+    direction = "float"
+})
 
 require("nvim_comment").setup({ comment_empty = false })
 require("gitsigns").setup()

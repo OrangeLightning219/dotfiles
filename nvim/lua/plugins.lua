@@ -67,6 +67,8 @@ plugins = {
     "stevearc/conform.nvim",
     "unblevable/quick-scope",
     -- "luckasRanarison/tailwind-tools.nvim",
+
+    { "akinsho/toggleterm.nvim", version = "*", config = true },
 }
 
 options = {}
