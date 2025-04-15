@@ -221,8 +221,50 @@ require("nvim-treesitter.configs").setup({
     },
     highlight = { enable = true, },
     indent = { enable = true },
-    playground = { enable = false, }
+    playground = { enable = true, },
+    textobjects = {
+        swap = {
+            enable = true,
+            swap_next = {
+                ["<leader>al"] = "@parameter.inner",
+            },
+            swap_previous = {
+                ["<leader>ah"] = "@parameter.inner",
+            },
+        },
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                ["<leader>l"] = "@parameter.inner",
+            },
+            goto_next_end = {},
+            goto_previous_start = {
+                ["<leader>h"] = "@parameter.inner",
+            },
+            goto_previous_end = {},
+        },
+        select = {
+            enable = true,
+            lookahead = true,
+      
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ["ia"] = "@parameter.inner",
+              ["aa"] = "@parameter.outer",
+            },
+            selection_modes = {
+              ['@parameter.inner'] = 'v',
+              ['@parameter.outer'] = 'v',
+            },
+            include_surrounding_whitespace = true,
+          },
+    },
 })
+
+local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
 
 require("treesitter-context").setup({
     line_numbers = true,

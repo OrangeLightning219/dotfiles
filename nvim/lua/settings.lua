@@ -87,7 +87,7 @@ keymap("n", "<leader>d",  ":Telescope diagnostics<CR>", options)
 -- keymap("n", "<leader>e",  "<cmd>lua vim.diagnostic.open_float()<CR>", options)
 keymap("n", "<leader>e",  ":Lspsaga diagnostic_jump_next<CR>", options)
 keymap("n", "<leader>w",  ":Telescope neovim-project history<CR>", options)
-keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
+-- keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
 keymap("n", "<leader>gg", ":LazyGitCurrentFile<CR>", options)
 
 keymap("n", "<F5>", ":wa<CR>:Automaton tasks default<CR>", options)

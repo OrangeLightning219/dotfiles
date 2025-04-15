@@ -66,6 +66,7 @@ plugins = {
     
     "stevearc/conform.nvim",
     "unblevable/quick-scope",
+    "nvim-treesitter/nvim-treesitter-textobjects",
     -- "luckasRanarison/tailwind-tools.nvim",
 
     { "akinsho/toggleterm.nvim", version = "*", config = true },
