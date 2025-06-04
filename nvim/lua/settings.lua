@@ -8,6 +8,9 @@ vim.g.nobackup = true
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_transparency = 1
 vim.g.neovide_normal_opacity = 1
+vim.g.neovide_scroll_animation_length = 0.4
+-- vim.g.neovide_refresh_rate = 165
+-- vim.g.neovide_profiler = true
 vim.g.delimitMate_expand_cr = 1
 
 vim.opt.wrap = true
@@ -45,7 +48,8 @@ vim.opt.concealcursor = ""
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,resize"
 
-vim.opt.guifont = { "FiraCode Nerd Font", ":h14" }
+-- vim.opt.guifont = { "FiraCode Nerd Font", ":h14" }
+vim.opt.guifont = { "BerkeleyMono Nerd Font", ":h14" }
 -- vim.opt.guifont = { "CaskaydiaCove NF", ":h12" }
 -- vim.opt.guifont = { "JetBrainsMono NF", ":h12" }
 

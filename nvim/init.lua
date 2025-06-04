@@ -265,6 +265,10 @@ require("nvim-treesitter.configs").setup({
 local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
 vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
 vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
 require("treesitter-context").setup({
     line_numbers = true,
@@ -327,7 +331,7 @@ require("lualine").setup({ options = { theme = "material" }})
 require("todo-comments").setup({
     keywords = {
         PERF = { alt = { "PERFORMANCE", "OPTIMIZE", "MEMORY" } },
-        CLEANUP = { icon = "󰃢 ", color = pallete.rose },
+        CLEANUP = { alt = { "NOCOMMIT", "nocommit" }, icon = "󰃢 ", color = pallete.love },
     },
 })
 require("neovim-project").setup({
