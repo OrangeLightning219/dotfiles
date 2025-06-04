@@ -156,8 +156,8 @@ cmp.setup({
     snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end },
 })
 
-cmp.setup.cmdline("/", {sources = {{ name = "buffer" }}})
-cmp.setup.cmdline(":", {sources = cmp.config.sources({{ name = "path" }}, {{ name = "cmdline" }})})
+cmp.setup.cmdline("/", {sources = {{ name = "buffer" }}, mapping = cmp.mapping.preset.cmdline()})
+cmp.setup.cmdline(":", {sources = cmp.config.sources({{ name = "path" }}, {{ name = "cmdline" }}), mapping = cmp.mapping.preset.cmdline()})
 
 -- Autocomplete popup highlight groups
 vim.api.nvim_set_hl(0, "PmenuSel", { bg = pallete.overlay, fg = "NONE" })
