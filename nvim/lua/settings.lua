@@ -96,8 +96,10 @@ keymap("n", "<leader>gg", ":LazyGitCurrentFile<CR>", options)
 
 keymap("n", "<F5>", ":wa<CR>:Automaton tasks default<CR>", options)
 keymap("i", "<F5>", "<Cmd>:wa<CR><Cmd>:Automaton tasks default<CR>", options)
-keymap("n", "<F8>", ":wa<CR>:Automaton launch default<CR>", options)
-keymap("i", "<F8>", "<Cmd>:wa<CR><Cmd>:Automaton launch default<CR>", options)
+keymap("n", "<F8>", ":wa<CR>:Automaton tasks run_debug<CR>", options)
+keymap("i", "<F8>", "<Cmd>:wa<CR><Cmd>:Automaton tasks run_debug<CR>", options)
+keymap("n", "<F7>", ":wa<CR>:Automaton tasks run_release<CR>", options)
+keymap("i", "<F7>", "<Cmd>:wa<CR><Cmd>:Automaton tasks run_release<CR>", options)
 
 keymap("n", "<M-/>", ":CommentToggle<CR>", options)
 keymap("i", "<M-/>", "<Cmd>:CommentToggle<CR>", options)
@@ -140,7 +142,6 @@ vim.api.nvim_create_user_command("EvenSplits", even_splits, {nargs = 0, desc = "
 
 vim.opt.errorformat:append("%f:%l\\,%c:\\ Error:\\ %m")
 vim.opt.errorformat:append("%f:%l\\,%c:\\ Warning:\\ %m")
-vim.opt.errorformat:append("%f\\(%l\\,%c-%*[0-9]\\):\\ error\\ X%*[0-9]:\\ %m")
 
 local function format(args)
     require("conform").format({ bufnr = args.buf })

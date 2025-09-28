@@ -74,15 +74,6 @@ configs.jails = {
 --     capabilities = capabilities
 -- })
 
--- require("lspconfig").pyright.setup({
---     capabilities = capabilities
--- })
-
--- require("lspconfig").gopls.setup({})
--- require("lspconfig").htmx.setup({})
--- require("lspconfig").tailwindcss.setup({})
--- require("lspconfig").csharp_ls.setup({})
-
 vim.diagnostic.config({
     signs = {
         text = {
@@ -285,7 +276,6 @@ require("neo-tree").setup({
 -- =================================================================================
 
 require("automaton").setup({})
-
 -- =================================================================================
 
 require('plenary.filetype').add_file('jai')
@@ -306,9 +296,6 @@ require("telescope").setup({
 -- =================================================================================
 require("conform").setup({ 
     formatters_by_ft = { 
-        html  = { "djlint" }, 
-        go    = { "goimports", "gofmt" },
-        templ = { "templ" },
         c     = { "clang-format" },
         cpp   = { "clang-format" },
         h     = { "clang-format" },
@@ -316,13 +303,6 @@ require("conform").setup({
         cc    = { "clang-format" }, 
         cs    = { "csharpier" }, 
     } 
-})
--- require("conform").formatters.djlint = { prepend_args = { "--profile=golang", "--max-blank-lines=1", "--format-js", "--indent-js=4" } }
--- require("tailwind-tools").setup({ custom_filetypes = { "templ" }, conceal = { enabled = true } })
-
-require("toggleterm").setup({
-    open_mapping = [[<c-\>]],
-    direction = "float"
 })
 
 require("nvim_comment").setup({ comment_empty = false })

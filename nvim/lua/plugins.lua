@@ -12,9 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 plugins = {
-    -- "dstein64/vim-startuptime",
-    -- "nathom/filetype.nvim",
-
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/playground",
@@ -47,12 +44,10 @@ plugins = {
     "Raimondi/delimitMate",
     "rhysd/vim-clang-format",
 
-    -- "rcarriga/nvim-notify",
-
     { 'rose-pine/neovim', name = 'rose-pine' },
 
-    -- "OrangeLightning219/automaton.nvim",
-    "Dax89/automaton.nvim",
+    "OrangeLightning219/automaton.nvim",
+    -- "Dax89/automaton.nvim",
 
     {
         "coffebar/neovim-project",
@@ -67,11 +62,14 @@ plugins = {
     "stevearc/conform.nvim",
     "unblevable/quick-scope",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    -- "luckasRanarison/tailwind-tools.nvim",
-
-    { "akinsho/toggleterm.nvim", version = "*", config = true },
 }
 
-options = {}
+options = {
+    dev = {
+        path = "F:/Misc",
+        patterns = {"automaton.nvim"},
+        fallback = false
+    }
+}
 
 require("lazy").setup(plugins, options)
