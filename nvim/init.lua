@@ -21,7 +21,7 @@ require('rose-pine').setup({
         ['@constant'] = {fg = pallete.iris, link = ""},
         ['@constructor'] = {fg = pallete.rose},
         ['@keyword'] = {fg = pallete.pine, link = ""},
-        ['@field'] = {fg = pallete.leaf, link = ""},
+        ['@field'] = {fg = pallete.text, link = ""},
         ['@repeat'] = {fg = pallete.pine, link = ""},
         ['@conditional'] = {fg = pallete.pine, link = ""},
         ['@exception'] = {fg = pallete.pine, link = ""},

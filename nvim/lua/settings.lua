@@ -140,8 +140,9 @@ end
 
 vim.api.nvim_create_user_command("EvenSplits", even_splits, {nargs = 0, desc = ""}) 
 
-vim.opt.errorformat:append("%f:%l\\,%c:\\ Error:\\ %m")
-vim.opt.errorformat:append("%f:%l\\,%c:\\ Warning:\\ %m")
+vim.o.errorformat = ""
+vim.o.errorformat = vim.o.errorformat .. "%f:%l\\,%c:\\ Warning:\\ %m,"
+vim.o.errorformat = vim.o.errorformat .. "%f:%l\\,%c:\\ Error:\\ %m"
 
 local function format(args)
     require("conform").format({ bufnr = args.buf })
