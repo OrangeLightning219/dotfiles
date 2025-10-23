@@ -196,7 +196,9 @@ local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.jai = {
     install_info = {
-        url = "https://github.com/constantitus/tree-sitter-jai", 
+        url = "https://github.com/OrangeLightning219/tree-sitter-jai",
+        -- url = "https://github.com/constantitus/tree-sitter-jai",
+        branch = "less_broken",
         -- url = "https://github.com/adragomir/tree-sitter-jai", 
         files = {"src/parser.c", "src/scanner.c"},
     },
