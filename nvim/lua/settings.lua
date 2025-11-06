@@ -132,7 +132,7 @@ local function jai_format()
     }):start()
 end
 
-vim.api.nvim_create_user_command("JaiFormat", jai_format, {nargs = 0, desc = ""}) 
+vim.api.nvim_create_user_command("JaiFormat", jai_format, {nargs = 0, desc = ""})
 
 local function even_splits()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", true, false, true), "n", false)
@@ -154,7 +154,7 @@ end
 
 commands = {
     {events = {"User"}, patterns = {"SessionSavePre"}, command = "cclose"},
-    {events = {"BufWritePost"}, patterns = {"*.jai"}, command = "JaiFormat"},
+    -- {events = {"BufWritePost"}, patterns = {"*.jai"}, command = "JaiFormat"},
     {events = {"BufWritePre"}, patterns = {"*"}, callback = format},
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.go", "*.templ"}, command = "setlocal noet ts=4 sw=4 sts=4"},
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.templ"}, command = "setlocal nowrap"},

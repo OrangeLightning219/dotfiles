@@ -296,6 +296,7 @@ require("telescope").setup({
 })
 
 -- =================================================================================
+local conform_util = require("conform.util")
 require("conform").setup({ 
     formatters_by_ft = { 
         c     = { "clang-format" },
@@ -304,7 +305,16 @@ require("conform").setup({
         hpp   = { "clang-format" },
         cc    = { "clang-format" }, 
         cs    = { "csharpier" }, 
-    } 
+        jai   = { "jai-format" }, 
+    },
+    formatters = {
+        ["jai-format"] = {
+            command = "jai-format",
+            args = { "-silent", "-to_file", "$FILENAME" },
+            cwd = conform_util.root_file({ ".jai-format" }),
+            stdin = false,
+        },
+    }
 })
 
 require("nvim_comment").setup({ comment_empty = false })
