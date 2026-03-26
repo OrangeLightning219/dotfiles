@@ -1,0 +1,131 @@
+%YAML 1.2
+---
+# https://www.sublimetext.com/docs/3/syntax.html
+# https://www.sublimetext.com/docs/3/scope_naming.html 
+
+name: Jai
+file_extensions:
+  - jai
+scope: source.jai
+
+contexts:
+  main:
+    - include: comment
+    - include: constant_value
+    - include: keyword
+    - include: struct
+    - include: enum
+    - include: procedure
+    - include: hash_type
+    - include: other_constants 
+    - include: cast
+    - include: call
+
+  comment:
+    - include: line_comment
+    - include: block_comment
+
+  line_comment:
+    - match: //
+      push:
+        - meta_scope: comment.line.jai
+        - match: $
+          pop: true
+
+  block_comment:
+    - match: /\*
+      push:
+        # Allow nested comments.
+        - include: block-comment
+        - meta_scope: comment.block.jai
+        - match: \*/
+          pop: true
+
+  constant_value:
+    - match: \btrue\b
+      scope: constant.language.boolean
+    - match: \bfalse\b
+      scope: constant.language.boolean
+    - match: \bnull\b
+      scope: constant.language.null.jai
+    - match: '(?<!\w)(0(?:x|h))(?:[[:xdigit:]])+(?:[[:xdigit:]]|_)*'
+      scope: constant.numeric.hexadecimal.jai
+    - match: '(?<!\w)(?:\d)+(?:\d|_)*(?:\.(?:\d|_)+)?'
+      scope: constant.numeric.decimal.jai
+    - match: '".*?"'
+      scope: string.quoted.double.jai
+    - match: (#string)\s+(.*)
+      captures:
+        1: keyword.other.directive.jai
+        2: constant.other.stringdelimiter.jai
+      scope:
+      embed: herestring
+      escape: (\2)
+      escape_captures:
+        1: constant.other.stringdelimiter.jai
+
+  herestring:
+    - meta_scope: string.unquoted.jai
+
+  keyword:
+    - match: '#\w*'
+      scope: keyword.other.directive.jai
+    - match: '@\S+'
+      scope: keyword.other.tag.jai
+    - match: '\b(?:if|then|else|case|for|while|break|continue|defer|return)\b'
+      scope: keyword.control.jai
+    - match: '\b(?:xx|size_of)\b'
+      scope: keyword.operator.word.jai
+    - match: '(?:\+|-|\*|/|<|>|!)=?'
+      scope: keyword.operator.jai
+    - match: ==|<<|\.\.|&&|\:=
+      scope: keyword.operator.jai
+    - match: '\b(?:using|it|it_index|push_context|inline|no_inline)\b'
+      scope: keyword.other.jai
+    - match: '---|\$\$'
+      scope: keyword.other.jai
+    - match: '\b(?:Any|Type|void|string|bool|float|float32|float64|int|u8|u16|u32|u64|s8|s16|s32|s64)\b'
+      scope: storage.type.jai
+    - match: ;|\(|\)|[|]|{|}
+      scope: comment
+
+  struct:
+    - match: (\w+)\s*:\s*\w*\s*:\s*(struct)
+      captures:
+        1: entity.name.type.struct.jai
+        2: storage.type.struct.jai
+
+  enum:
+    - match: (\w+)\s*:\s*\w*\s*:\s*(enum|enum_flags)
+      captures:
+        1: entity.name.type.enum.jai
+        2: storage.type.enum.jai
+
+  procedure:
+    - match: (\w+)\s*:\s*\w*\s*:\s*(inline)?\s*\(
+      captures:
+        1: entity.name.type.procedure.jai
+
+  hash_type:
+    - match: (\w+)\s*:\s*\w*\s*:\s*(\#type)\b
+      captures:
+        1: entity.name.type.jai
+        2: storage.type.jai
+
+  other_constants:
+    - match: (\w+)\s*:\s*\w*\s*:\s*\b
+      captures:
+        1: entity.name.constant.jai
+
+  cast:
+    - match: \b(cast)\s*\((.+?)\)
+      captures:
+        1: keyword.operator.word.cast.jai
+        2: storage.type.jai
+
+  call:
+    - match: ((\w+)\s*\()
+      captures:
+        1: meta.function-call.jai
+        2: variable.function.jai
+

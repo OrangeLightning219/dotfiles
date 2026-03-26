@@ -16,7 +16,6 @@ plugins = {
     "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/playground",
 
-    "neovim/nvim-lspconfig",
     "nvimdev/lspsaga.nvim",
     
     "hrsh7th/cmp-nvim-lsp",

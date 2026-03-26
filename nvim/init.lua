@@ -53,26 +53,19 @@ require('rose-pine').setup({
 vim.cmd('colorscheme rose-pine')
 
 -- =================================================================================
-
-local configs = require("lspconfig.configs")
-local util = require("lspconfig.util")
-
-configs.jails = {
-    default_config = {
-        cmd = { "jails" },
-        filetypes = { "jai" },
-        root_dir = util.path.dirname,
-    },
-}
--- require("lspconfig").jails.setup({})
-
 -- vim.lsp.set_log_level("debug")
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- require("lspconfig").clangd.setup({
---     cmd = {"clangd", "--header-insertion=never"},
---     capabilities = capabilities
--- })
+-- vim.lsp.config["jails"] = {
+--     cmd = { "jails" },
+--     filetypes = { "jai" },
+--     root_markers = { "jails.json" },
+-- }
+-- vim.lsp.enable("jails")
+
+vim.lsp.config["clangd"] = {
+    cmd = {"clangd", "--header-insertion=never"},
+}
+-- vim.lsp.enable("clangd")
 
 vim.diagnostic.config({
     signs = {
@@ -299,11 +292,11 @@ require("telescope").setup({
 local conform_util = require("conform.util")
 require("conform").setup({ 
     formatters_by_ft = { 
-        c     = { "clang-format" },
-        cpp   = { "clang-format" },
-        h     = { "clang-format" },
-        hpp   = { "clang-format" },
-        cc    = { "clang-format" }, 
+        -- c     = { "clang-format" },
+        -- cpp   = { "clang-format" },
+        -- h     = { "clang-format" },
+        -- hpp   = { "clang-format" },
+        -- cc    = { "clang-format" }, 
         cs    = { "csharpier" }, 
         jai   = { "jai-format" }, 
     },
@@ -333,3 +326,23 @@ require("neovim-project").setup({
     },
 })
 -- =================================================================================
+
+local telescope = require("telescope")
+local telescope_builtin = require("telescope.builtin")
+local live_grep_jai_modules = function()
+    local opts = {
+        cwd = "E:/Tools/jai/",
+        search_dirs = { "modules/", "how_to/" },
+    }
+    telescope_builtin.live_grep(opts)
+end
+
+local find_files_jai_modules = function()
+    local opts = require('telescope.themes').get_dropdown({previewer = false})
+    opts.cwd = "E:/Tools/jai/"
+    opts.search_dirs = { "modules/", "how_to/" }
+    telescope_builtin.find_files(opts)
+end
+
+vim.keymap.set("n", "<leader>jt", live_grep_jai_modules, { desc = "Live grep in jai modules" })
+vim.keymap.set("n", "<leader>jf", find_files_jai_modules, { desc = "Fuzzy find files in jai modules" })
