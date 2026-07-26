@@ -303,9 +303,10 @@ require("conform").setup({
     formatters = {
         ["jai-format"] = {
             command = "jai-format",
-            args = { "-silent", "-to_file", "$FILENAME" },
+            -- args = { "-silent", "-to_file", "$FILENAME" },
+            args = { "-silent", "-to_stdout", "-from_stdin", "$RELATIVE_FILEPATH" },
             cwd = conform_util.root_file({ ".jai-format" }),
-            stdin = false,
+            stdin = true,
         },
     }
 })

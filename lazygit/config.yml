@@ -2,7 +2,7 @@ gui:
   language: 'en'
   theme:
     activeBorderColor:
-      - "#3e8fb0"
+      - "#8981d6"
       - bold
     inactiveBorderColor:
       - "#6e6a86"
@@ -12,7 +12,7 @@ gui:
     optionsTextColor:
       - "#9ccfd8"
     selectedLineBgColor:
-      - "#3e8fb0"
+      - "#8981d6"
     inactiveViewSelectedLineBgColor:
       - "#393552"
       - bold

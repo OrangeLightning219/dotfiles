@@ -65,6 +65,11 @@ keymap("i", "<Right>", "", options)
 keymap("n", "<Left>", "", options)
 keymap("i", "<Left>", "", options)
 
+keymap("n", "j", "gj", options)
+keymap("v", "j", "gj", options)
+keymap("n", "k", "gk", options)
+keymap("v", "k", "gk", options)
+
 keymap("n", "<C-u>",      "<C-u>zz", options)
 keymap("i", "<C-u>",      "<C-u>zz", options)
 keymap("n", "<C-d>",      "<C-d>zz", options)
@@ -158,7 +163,7 @@ commands = {
     {events = {"BufWritePre"}, patterns = {"*"}, callback = format},
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.go", "*.templ"}, command = "setlocal noet ts=4 sw=4 sts=4"},
     {events = {"BufNewFile", "BufReadPre"}, patterns = {"*.templ"}, command = "setlocal nowrap"},
-    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl"}, command = "set commentstring=//\\ %s"},
+    {events = {"BufEnter", "BufFilePost"}, patterns = {"*.jai", "*.c", "*.cc", "*.cpp", "*.h", "*.hpp", "*.hlsl", "*.shader"}, command = "set commentstring=//\\ %s"},
     {events = {"BufEnter", "BufFilePost"}, patterns = {"*.py", "*.keymap", ".jai-format"}, command = "set commentstring=#\\ %s"},
     -- {events = {"BufEnter", "BufFilePost"}, patterns = {"*.pixel", "*.vertex", "*.compute"}, command = "set filetype=hlsl"},
     {events = {"FileType"}, patterns = {"qf"}, command = "wincmd J"},
