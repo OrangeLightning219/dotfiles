@@ -198,7 +198,24 @@ parser_config.jai = {
     filetype = "jai", 
 }
 
+parser_config.shader = {
+    install_info = {
+        -- url = vim.fs.normalize("F:/Jai_Projects/roguelike/src/misc/treesitter-shader"),
+        url = "https://github.com/OrangeLightning219/treesitter-shader",
+        branch = "main",
+        files = {"src/parser.c", "src/scanner.c"},
+    },
+    filetype = "shader",
+}
+
+vim.filetype.add({
+    extension = {
+        shader = "shader",
+    },
+})
+
 vim.treesitter.language.register("jai", "jai")
+vim.treesitter.language.register("shader", "shader")
 
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
@@ -297,8 +314,9 @@ require("conform").setup({
         -- h     = { "clang-format" },
         -- hpp   = { "clang-format" },
         -- cc    = { "clang-format" }, 
-        cs    = { "csharpier" }, 
-        jai   = { "jai-format" }, 
+        cs     = { "csharpier" },
+        jai    = { "jai-format" },
+        shader = { "injected" },
     },
     formatters = {
         ["jai-format"] = {
@@ -308,6 +326,24 @@ require("conform").setup({
             cwd = conform_util.root_file({ ".jai-format" }),
             stdin = true,
         },
+        injected = {
+            options = {
+                -- Conform creates temporary filenames for injected regions.
+                -- Some formatters use the extension to determine the language.
+                lang_to_ext = {
+                    jai = "jai",
+                    hlsl = "hlsl",
+                },
+
+                -- Tree-sitter language name -> Conform formatter names.
+                lang_to_formatters = {
+                    jai = { "jai-format" },
+
+                    -- Replace this with the Conform name of your HLSL formatter.
+                    -- hlsl = { "clang_format" },
+                }
+            }
+        }
     }
 })
 
