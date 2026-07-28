@@ -92,7 +92,7 @@
                 "opacity": 100,
                 "padding": "8",
                 "scrollbarState": "visible",
-                "startingDirectory": "%SECONDARY_GAMEDEV_PATH%\\Jai_Projects\\roguelike",
+                "startingDirectory": "%GAMEDEV_PATH%\\Projects\\roguelike",
                 "useAcrylic": true
             },
             {
@@ -106,7 +106,7 @@
                 "antialiasingMode": "grayscale",
                 "closeOnExit": "graceful",
                 "colorScheme": "One Half Dark",
-                "commandline": "powershell.exe -NoLogo -NoExit -ExecutionPolicy Unrestricted -File e:/Visual_Studio_Vars.ps1",
+                "commandline": "powershell.exe -NoLogo -NoExit -ExecutionPolicy Unrestricted -File E:/Tools/.config/Visual_Studio_Vars.ps1",
                 "cursorShape": "bar",
                 "font": 
                 {

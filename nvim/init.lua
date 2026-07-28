@@ -368,7 +368,7 @@ local telescope = require("telescope")
 local telescope_builtin = require("telescope.builtin")
 local live_grep_jai_modules = function()
     local opts = {
-        cwd = "E:/Tools/jai/",
+        cwd = os.getenv("GAMEDEV_PATH") .. "/Tools/jai/",
         search_dirs = { "modules/", "how_to/" },
     }
     telescope_builtin.live_grep(opts)
@@ -376,7 +376,7 @@ end
 
 local find_files_jai_modules = function()
     local opts = require('telescope.themes').get_dropdown({previewer = false})
-    opts.cwd = "E:/Tools/jai/"
+    opts.cwd = os.getenv("GAMEDEV_PATH") .. "/Tools/jai/"
     opts.search_dirs = { "modules/", "how_to/" }
     telescope_builtin.find_files(opts)
 end

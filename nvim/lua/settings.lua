@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 
 vim.g.nobackup = true
 vim.g.neovide_remember_window_size = true
-vim.g.neovide_transparency = 1
+vim.g.neovide_opacity = 1
 vim.g.neovide_normal_opacity = 1
 vim.g.neovide_scroll_animation_length = 0.4
 -- vim.g.neovide_refresh_rate = 165
