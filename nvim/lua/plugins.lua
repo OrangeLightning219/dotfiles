@@ -17,30 +17,33 @@ plugins = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/playground",
 
-    { 'OrangeLightning219/blink.cmp', version = "1.*", dependencies = { 'saghen/blink.lib' }, dev = false },
+    { 'OrangeLightning219/blink.cmp', branch = "v1", build = "cargo build --release", dev = false },
 
-    "nvim-tree/nvim-web-devicons",
+    "OrangeLightning219/automaton.nvim",
+
+    "stevearc/conform.nvim",
+
     { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = { "MunifTanjim/nui.nvim" } },
+
     "nvim-lualine/lualine.nvim",
 
     { "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" } },
-    { "nvim-telescope/telescope-fzf-native.nvim",  build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
+    { "nvim-telescope/telescope-fzf-native.nvim",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
 
     "kdheepak/lazygit.nvim",
     "lewis6991/gitsigns.nvim",
+
+    { "coffebar/neovim-project", dependencies = { { "Shatur/neovim-session-manager" } }, lazy = false, priority = 100 },
 
     "terrortylor/nvim-comment",
     "folke/todo-comments.nvim",
     "Raimondi/delimitMate",
 
-    { 'rose-pine/neovim', name = 'rose-pine' },
-
-    "OrangeLightning219/automaton.nvim",
-
-    { "coffebar/neovim-project", dependencies = { { "Shatur/neovim-session-manager" } }, lazy = false, priority = 100 },
-    
-    "stevearc/conform.nvim",
     "unblevable/quick-scope",
+    "nvim-tree/nvim-web-devicons",
+
+    { 'rose-pine/neovim', name = 'rose-pine' },
 }
 
 -- local options = {
