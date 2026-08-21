@@ -14,19 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 plugins = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-context",
+    "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/playground",
 
-    "nvimdev/lspsaga.nvim",
-    
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "OrangeLightning219/nvim-cmp",
-    "onsails/lspkind.nvim",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/vim-vsnip",
-    "hrsh7th/vim-vsnip-integ",
+    { 'OrangeLightning219/blink.cmp', version = "1.*", dependencies = { 'saghen/blink.lib' }, dev = false },
 
     "nvim-tree/nvim-web-devicons",
     { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = { "MunifTanjim/nui.nvim" } },
@@ -41,34 +32,24 @@ plugins = {
     "terrortylor/nvim-comment",
     "folke/todo-comments.nvim",
     "Raimondi/delimitMate",
-    "rhysd/vim-clang-format",
 
     { 'rose-pine/neovim', name = 'rose-pine' },
 
     "OrangeLightning219/automaton.nvim",
-    -- "Dax89/automaton.nvim",
 
-    {
-        "coffebar/neovim-project",
-        init = function()
-          vim.opt.sessionoptions:append("globals")
-        end,
-        dependencies = { { "Shatur/neovim-session-manager" } },
-        lazy = false,
-        priority = 100,
-    },
+    { "coffebar/neovim-project", dependencies = { { "Shatur/neovim-session-manager" } }, lazy = false, priority = 100 },
     
     "stevearc/conform.nvim",
     "unblevable/quick-scope",
-    "nvim-treesitter/nvim-treesitter-textobjects",
 }
 
-options = {
-    dev = {
-        path = "F:/Misc",
-        patterns = {"automaton.nvim"},
-        fallback = false
-    }
-}
+-- local options = {
+--     dev = {
+--         path = "E:/Misc",
+--         -- patterns = {"automaton.nvim"},
+--         patterns = {"blink.cmp"},
+--         fallback = false
+--     }
+-- }
 
 require("lazy").setup(plugins, options)

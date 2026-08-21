@@ -46,7 +46,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.pumheight = 10
 vim.opt.concealcursor = ""
 
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,resize"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,resize,globals"
 
 -- vim.opt.guifont = { "FiraCode Nerd Font", ":h14" }
 vim.opt.guifont = { "BerkeleyMono Nerd Font", ":h14" }
@@ -87,14 +87,12 @@ keymap("n", "<leader>1", ":Neotree toggle<CR>", options)
 
 keymap("n", "<leader>n",  "<cmd>lua vim.lsp.buf.rename()<CR>", options)
 keymap("i", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
-keymap("n", "<leader>ca", ":Lspsaga code_action<CR>", options)
 keymap("n", "<leader>gr", ":Telescope lsp_references<CR>", options)
 keymap("n", "<leader>gd", ":Telescope lsp_definitions<CR>", options)
 keymap("n", "<leader>f",  "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<CR>", options)
 keymap("n", "<leader>t",  ":Telescope live_grep<CR>", options)
 keymap("n", "<leader>d",  ":Telescope diagnostics<CR>", options)
 -- keymap("n", "<leader>e",  "<cmd>lua vim.diagnostic.open_float()<CR>", options)
-keymap("n", "<leader>e",  ":Lspsaga diagnostic_jump_next<CR>", options)
 keymap("n", "<leader>w",  ":Telescope neovim-project history<CR>", options)
 -- keymap("n", "<leader>a",  ":EvenSplits<CR>", options)
 keymap("n", "<leader>gg", ":LazyGitCurrentFile<CR>", options)

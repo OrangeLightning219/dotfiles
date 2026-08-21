@@ -78,108 +78,46 @@ vim.diagnostic.config({
     }
 })
 
-require("lspsaga").setup({
-    symbol_in_winbar = {
-        enable = false,
-    },
-    beacon = {
-        enable = false,
-    },
-    lightbulb = {
-        enable = false,
-    },
-    code_action = {
-        keys = {
-            quit = { "q", "<ESC>" },
-            exec = "<CR>",
-        },
-    }
-})
-
 -- =================================================================================
-
-local cmp = require("cmp")
-
-snippets_filter = function(entry)
-    return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
-end 
-
-cmp.setup({
-    view = { entries = { name = "custom", separator = "|" } },
-    window = {
-        completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-            col_offset = -3,
-            side_padding = 0,
+require("blink.cmp").setup({
+    keymap = {
+        preset = "none",
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        -- ["<Esc>"] = { "hide", "fallback" },
+        ["<Esc>"] = {
+            function ()
+                require("blink.cmp").hide()
+            end,
+            "fallback"
         },
+        ["<Enter>"] = { "accept", "fallback" },
+        ["<C-Space>"] = { "show", "fallback" },
     },
-    formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-            local strings = vim.split(kind.kind, "%s", { trimempty = true })
-            kind.kind = " " .. (strings[1] or "") .. " "
-            kind.menu = "    (" .. (strings[2] or "") .. ")"
-            vim_item.dup = 0
-            return kind
-        end,
+
+    completion = {
+        list = { selection = { auto_insert = false } },
+        accept = { auto_brackets = { enabled = false } },
+        documentation = { auto_show = false },
+        ghost_text = { enabled = true }
     },
-    mapping = {
-        ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<CR>"] = cmp.mapping.confirm({ select = true })
-    }, 
-    sources = cmp.config.sources({
-        { name = "nvim_lsp", entry_filter = snippets_filter }, 
-        { name = 'nvim_lsp_signature_help' },
-        { name = "buffer" }
-    }),
-    experimental = {
-        ghost_text = true
+
+    cmdline = {
+        enabled = true,
+        keymap = { 
+            preset = "inherit",
+            ["<Enter>"] = { "accept_and_enter", "fallback" },
+        },
+        sources = { "buffer", "cmdline" },
+        completion = {
+            list = { selection = { auto_insert = true, preselect = false } },
+            menu = { auto_show = true }
+        }
     },
-    snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end },
+
+    sources = { default = { "buffer", "path" } },
+    fuzzy = { implementation = "rust" }
 })
-
-cmp.setup.cmdline("/", {sources = {{ name = "buffer" }}, mapping = cmp.mapping.preset.cmdline()})
-cmp.setup.cmdline(":", {sources = cmp.config.sources({{ name = "path" }}, {{ name = "cmdline" }}), mapping = cmp.mapping.preset.cmdline()})
-
--- Autocomplete popup highlight groups
-vim.api.nvim_set_hl(0, "PmenuSel", { bg = pallete.overlay, fg = "NONE" })
-vim.api.nvim_set_hl(0, "Pmenu", { fg = pallete.text, bg = pallete.nc })
-
-vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = pallete.subtle, bg = "NONE", strikethrough = true })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = pallete.love, bg = "NONE", bold = true })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = pallete.love, bg = "NONE", bold = true })
-vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = pallete.gold, bg = "NONE", italic = true })
-
-vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = pallete.surface, bg = pallete.gold })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = pallete.surface, bg = pallete.gold })
-vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = pallete.surface, bg = pallete.gold })
-
-vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = pallete.surface, bg = pallete.subtle })
-vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = pallete.surface, bg = pallete.foam })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = pallete.surface, bg = pallete.pine })
-
-vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = pallete.surface, bg = pallete.iris })
-vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = pallete.surface, bg = pallete.iris })
-vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = pallete.surface, bg = pallete.iris })
-
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = pallete.surface, bg = pallete.rose })
-vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = pallete.surface, bg = pallete.foam })
-vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = pallete.surface, bg = pallete.foam })
-vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = pallete.surface, bg = pallete.foam })
-vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = pallete.surface, bg = pallete.rose })
-
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = pallete.surface, bg = pallete.gold })
-vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = pallete.surface, bg = pallete.gold })
-
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = pallete.surface, bg = pallete.rose })
-vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = pallete.surface, bg = pallete.gold })
-vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = pallete.surface, bg = pallete.gold })
-
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = pallete.surface, bg = pallete.foam })
-vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = pallete.surface, bg = pallete.foam })
-vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = pallete.surface, bg = pallete.foam })
 
 -- =================================================================================
 
