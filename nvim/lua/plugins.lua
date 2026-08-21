@@ -15,7 +15,6 @@ plugins = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "nvim-treesitter/playground",
 
     { 'OrangeLightning219/blink.cmp', branch = "v1", build = "cargo build --release", dev = false },
 

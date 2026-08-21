@@ -123,28 +123,25 @@ require("blink.cmp").setup({
 
 require("nvim-treesitter.install").compilers = { "cl", "clang", "gcc" }
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
+    callback = function()
+        require('nvim-treesitter.parsers').jai = {
+            install_info = {
+                url = "https://github.com/OrangeLightning219/tree-sitter-jai",
+                branch = "less_broken",
+            },
+        }
 
-parser_config.jai = {
-    install_info = {
-        url = "https://github.com/OrangeLightning219/tree-sitter-jai",
-        -- url = "https://github.com/constantitus/tree-sitter-jai",
-        branch = "less_broken",
-        -- url = "https://github.com/adragomir/tree-sitter-jai", 
-        files = {"src/parser.c", "src/scanner.c"},
-    },
-    filetype = "jai", 
-}
+        require('nvim-treesitter.parsers').shader = {
+            install_info = {
+                url = "https://github.com/OrangeLightning219/treesitter-shader",
+                branch = "main",
+            },
+        }
+    end
+})
 
-parser_config.shader = {
-    install_info = {
-        -- url = vim.fs.normalize("F:/Jai_Projects/roguelike/src/misc/treesitter-shader"),
-        url = "https://github.com/OrangeLightning219/treesitter-shader",
-        branch = "main",
-        files = {"src/parser.c", "src/scanner.c"},
-    },
-    filetype = "shader",
-}
+vim.api.nvim_create_autocmd("FileType", { pattern = {"jai", "shader"}, callback = function(args) vim.treesitter.start() end })
 
 vim.filetype.add({
     extension = {
@@ -152,17 +149,15 @@ vim.filetype.add({
     },
 })
 
-vim.treesitter.language.register("jai", "jai")
-vim.treesitter.language.register("shader", "shader")
+vim.treesitter.language.register("jai", {"jai"})
+vim.treesitter.language.register("shader", {"shader"})
 
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "c", "cpp", "c_sharp", "bash", "cmake", "css", "cuda", "dockerfile", "glsl", "hlsl", "html", "jai",
-        "java", "javascript", "json", "lua", "make", "markdown", "python", "templ", "tsx", "vim", "yaml"
-    },
+require('nvim-treesitter').install({"c", "cpp", "c_sharp", "bash", "cmake", "css", "dockerfile", "glsl", "hlsl", "html", "jai", "shader",
+                                    "java", "javascript", "json", "lua", "make", "markdown", "python", "vim", "yaml"})
+
+require("nvim-treesitter.config").setup({
     highlight = { enable = true, },
     indent = { enable = true },
-    playground = { enable = true, },
     textobjects = {
         swap = {
             enable = true,
@@ -203,7 +198,7 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
-local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
 vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
 vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
