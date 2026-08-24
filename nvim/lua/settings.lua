@@ -119,24 +119,6 @@ keymap("n", "<leader>q", ":q<CR>", options)
 keymap("n", "<leader>cq", ":cclose<CR>", options)
 keymap("n", "<leader>jf", ":JaiFormat<CR>", options)
 
-local function jai_format()
-    local job = require("plenary.job")
-    local current_file = vim.fn.expand("%:p")
-    job:new({
-        command = "jai-format",
-        args = { "-to_file", current_file },
-        cwd = vim.fn.getcwd(),
-        on_exit = function(j, return_val)
-            local callback = vim.schedule_wrap(function(file) 
-                vim.api.nvim_command("checktime " .. file)
-            end)
-            callback(current_file)
-        end,
-    }):start()
-end
-
-vim.api.nvim_create_user_command("JaiFormat", jai_format, {nargs = 0, desc = ""})
-
 local function even_splits()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", true, false, true), "n", false)
 end
@@ -196,3 +178,12 @@ vim.filetype.add({
         compute = "hlsl"
     }
 })
+
+local notify = vim.notify
+
+vim.notify = function(msg, level, opts)
+    if level == vim.log.levels.DEBUG then
+        return
+    end
+    return notify(msg, level, opts)
+end

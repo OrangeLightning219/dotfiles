@@ -96,7 +96,7 @@ require("blink.cmp").setup({
     },
 
     completion = {
-        list = { selection = { auto_insert = false } },
+        list = { selection = { auto_insert = false, preselect = true } },
         accept = { auto_brackets = { enabled = false } },
         documentation = { auto_show = false },
         ghost_text = { enabled = true }
@@ -255,7 +255,7 @@ require("conform").setup({
         ["jai-format"] = {
             command = "jai-format",
             -- args = { "-silent", "-to_file", "$FILENAME" },
-            args = { "-silent", "-to_stdout", "-from_stdin", "$RELATIVE_FILEPATH" },
+            args = { "-silent", "-to_stdout", "-from_stdin", "$FILENAME" },
             cwd = conform_util.root_file({ ".jai-format" }),
             stdin = true,
         },
@@ -300,7 +300,7 @@ local telescope = require("telescope")
 local telescope_builtin = require("telescope.builtin")
 local live_grep_jai_modules = function()
     local opts = {
-        cwd = os.getenv("GAMEDEV_PATH") .. "/Tools/jai/",
+        cwd = os.getenv("GAMEDEV_PATH") .. "/Tools/jai",
         search_dirs = { "modules/", "how_to/" },
     }
     telescope_builtin.live_grep(opts)
@@ -308,7 +308,7 @@ end
 
 local find_files_jai_modules = function()
     local opts = require('telescope.themes').get_dropdown({previewer = false})
-    opts.cwd = os.getenv("GAMEDEV_PATH") .. "/Tools/jai/"
+    opts.cwd = os.getenv("GAMEDEV_PATH") .. "/Tools/jai"
     opts.search_dirs = { "modules/", "how_to/" }
     telescope_builtin.find_files(opts)
 end
