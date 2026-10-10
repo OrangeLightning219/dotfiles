@@ -20,7 +20,7 @@ plugins = {
 
     "OrangeLightning219/automaton.nvim",
 
-    "stevearc/conform.nvim",
+    "OrangeLightning219/conform.nvim",
 
     { "nvim-neo-tree/neo-tree.nvim", branch = "v3.x", dependencies = { "MunifTanjim/nui.nvim" } },
 

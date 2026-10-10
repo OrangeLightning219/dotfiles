@@ -141,7 +141,7 @@ vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
     end
 })
 
-vim.api.nvim_create_autocmd("FileType", { pattern = {"jai", "shader"}, callback = function(args) vim.treesitter.start() end })
+vim.api.nvim_create_autocmd("FileType", { pattern = {"jai", "shader", "hlsl"}, callback = function(args) vim.treesitter.start() end })
 
 vim.filetype.add({
     extension = {
@@ -249,6 +249,7 @@ require("conform").setup({
         -- cc    = { "clang-format" }, 
         cs     = { "csharpier" },
         jai    = { "jai-format" },
+        hlsl   = { "clang-format" },
         shader = { "injected" },
     },
     formatters = {
@@ -268,12 +269,9 @@ require("conform").setup({
                     hlsl = "hlsl",
                 },
 
-                -- Tree-sitter language name -> Conform formatter names.
                 lang_to_formatters = {
                     jai = { "jai-format" },
-
-                    -- Replace this with the Conform name of your HLSL formatter.
-                    -- hlsl = { "clang_format" },
+                    hlsl = { "clang-format" },
                 }
             }
         }
